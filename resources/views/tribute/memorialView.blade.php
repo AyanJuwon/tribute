@@ -47,9 +47,9 @@
                         <div class="memorial-view-top">
                             <p class="tribute__initials">GA</p>
                             <div class="tribute__poster">
-                                <h6 class="tribute__name">{{$detail->first_name. ' ' .$detail->last_name}}</h6>
+                                <h6 class="tribute__name">{{$detail->users->name}}}</h6>
                                 <div class="tribute__line">
-                                    <p class="tribute__user">{{auth()->user()->role}}</p>
+                                    <p class="tribute__user">{{$detail->users->role}}</p>
                                     <span class="dot-status"></span>
                                     <div class="tribute__date">{{$detail->created_at->toDateString()}}</div>
                                 </div>
@@ -69,41 +69,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="memorial-view__right">
-                                    <div class="memorial-view-cards">
-                                        <div class="card-share-memorial">
-                                            <div class="card-share-memorial__top">
-                                                <h6 class="card-heading">Share Memorial</h6>
-                                            </div>
-                                            <div class="card-share-memorial__content">
-                                                <p class="card-share-memorial__text">
-                                                    Share memorial with Johnson’s family and friends
-                                                </p>
-                                                <div class="card-share-memorial__socials">
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/ig-memorial.svg" alt="instagram" class="tribute-details__icon"></a>
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="whatsapp" class="tribute-details__icon"></a>
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="twitter" class="tribute-details__icon"></a>
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/facebook-memorial.svg" alt="facebook" class="tribute-details__icon"></a>
-                                                </div>
-                                                <div class="card-share-memorial__copy">
-                                                    <a href="#" id="copy-content">ademolawa-johnson/createtribute.com</a>
-                                                    <button id="btn-copy">
-                                                        <img src="../../assets/img/copy-icon.svg" alt="Copy Icon">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-small">
-                                            <p class="card-small__views">{{$detail->page_views}} View<span>@if( $detail->page_views ==1)
-                                            @else s @endif</span></p>
-                                        </div>
-                                        <div class="card-small">
-                                            <p class="card-small__created-by">Created By</>
-                                            </p>
-                                            <h5 class="card-small__creator">Gharham Anali</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                              @include('partials.memorial')
                             </div>
                         </div>
 
@@ -111,7 +77,7 @@
                             <h5 class="memorial-view-heading">Post a tribute</h5>
                             <p class="memorial-view-login">
                                 <a href="#" class="memorial-view-link">Log in</a>
-                                to post a tribute for Johnson Magbodi
+                                to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
                             </p>
                         </div>
                     </div>
@@ -122,62 +88,28 @@
                         <div class="memorial-view-top">
                             <p class="tribute__initials">GA</p>
                             <div class="tribute__poster">
-                                <h6 class="tribute__name">Gharham Anali</h6>
+                                <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                 <div class="tribute__line">
-                                    <p class="tribute__user">Administrator</p>
+                                    <p class="tribute__user">{{$detail->users->role}}</p>
                                     <span class="dot-status"></span>
-                                    <div class="tribute__date">15 Oct 2021</div>
+                                    <div class="tribute__date">{{$detail->created_at->toDateString() }}</div>
                                 </div>
-                            </div>
+                            </div>  
                         </div>
     
                         <div class="about-content__main">
                             <div class="memorial-view">
                                 <div class="memorial-view__left">
-                                    <h5 class="memorial-view-heading">Life of Johnson Magbodo</h5>
+                                    <h5 class="memorial-view-heading">Life of {{$detail->first_name. ' ' .$detail->last_name}}</h5>
                                     <div class="memorial-view__contain">
                                         <p class="memorial-view__text">
-                                            Johnson Magbodo is one of the most outstanding minds of modern Asia. He is the foremost of the Telugu poets today who has turned poetry to the gigantic strides of human history and embellished literature with the thrills and triumphs of the 20th century. A revolutionary poet who spurned the pedestrian and pedantic poetry equally,
+                                            {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia. He is the foremost of the Telugu poets today who has turned poetry to the gigantic strides of human history and embellished literature with the thrills and triumphs of the 20th century. A revolutionary poet who spurned the pedestrian and pedantic poetry equally,
                                             a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular. Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from
                                             India to that dynasty of intellectuals.
                                         </p>
                                     </div>
                                 </div>
-                                <div class="memorial-view__right">
-                                    <div class="memorial-view-cards">
-                                        <div class="card-share-memorial">
-                                            <div class="card-share-memorial__top">
-                                                <h6 class="card-heading">Share Memorial</h6>
-                                            </div>
-                                            <div class="card-share-memorial__content">
-                                                <p class="card-share-memorial__text">
-                                                    Share memorial with Johnson’s family and friends
-                                                </p>
-                                                <div class="card-share-memorial__socials">
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/ig-memorial.svg" alt="instagram" class="tribute-details__icon"></a>
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="whatsapp" class="tribute-details__icon"></a>
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="twitter" class="tribute-details__icon"></a>
-                                                    <a href="#" class="tribute-details__link"><img src="../../assets/img/facebook-memorial.svg" alt="facebook" class="tribute-details__icon"></a>
-                                                </div>
-                                                <div class="card-share-memorial__copy">
-                                                    <a href="#" id="copy-content">ademolawa-johnson/createtribute.com</a>
-                                                    <button id="btn-copy">
-                                                        <img src="../../assets/img/copy-icon.svg" alt="Copy Icon">
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-small">
-                                            <p class="card-small__views">{{$detail->page_views}} View<span>@if ( $detail->page_views ==1)
-                                            @else s @endif</span></p>
-                                        </div>
-                                        <div class="card-small">
-                                            <p class="card-small__created-by">Created By</>
-                                            </p>
-                                            <h5 class="card-small__creator">Gharham Anali</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                                @include('partials.memorial')
                             </div>
                         </div>
                     </div>
@@ -188,11 +120,11 @@
                         <div class="memorial-view-top">
                             <p class="tribute__initials">GA</p>
                             <div class="tribute__poster">
-                                <h6 class="tribute__name">Gharham Anali</h6>
+                                <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                 <div class="tribute__line">
-                                    <p class="tribute__user">Administrator</p>
+                                    <p class="tribute__user">{{$detail->users->role}}</p>
                                     <span class="dot-status"></span>
-                                    <div class="tribute__date">15 Oct 2021</div>
+                                    <div class="tribute__date">{{$detail->created_at->toDateString()}}</div>
                                 </div>
                             </div>
                         </div>
@@ -233,41 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="memorial-view__right">
-                                    <div class="memorial-view-cards">
-                                        <div class="card-share-memorial">
-                                            <div class="card-share-memorial__top">
-                                                <h6 class="card-heading">Share Memorial</h6>
-                                            </div>
-                                        <div class="card-share-memorial__content">
-                                            <p class="card-share-memorial__text">
-                                                Share memorial with Johnson’s family and friends
-                                            </p>
-                                            <div class="card-share-memorial__socials">
-                                                <a href="#" class="tribute-details__link"><img src="../../assets/img/ig-memorial.svg" alt="instagram" class="tribute-details__icon"></a>
-                                                <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="whatsapp" class="tribute-details__icon"></a>
-                                                <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="twitter" class="tribute-details__icon"></a>
-                                                <a href="#" class="tribute-details__link"><img src="../../assets/img/facebook-memorial.svg" alt="facebook" class="tribute-details__icon"></a>
-                                            </div>
-                                            <div class="card-share-memorial__copy">
-                                                <a href="#" id="copy-content">ademolawa-johnson/createtribute.com</a>
-                                                <button id="btn-copy">
-                                                    <img src="../../assets/img/copy-icon.svg" alt="Copy Icon">
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-small">
-                                        <p class="card-small__views">{{$detail->page_views}} View<span>@if ( $detail->page_views ==1)
-                                            @else s @endif</span></p>
-                                    </div>
-                                    <div class="card-small">
-                                        <p class="card-small__created-by">Created By</>
-                                        </p>
-                                        <h5 class="card-small__creator">Gharham Anali</h5>
-                                    </div>
-                                </div>
-                            </div>
+                               @include('partials.memorial')
                         </div>
                     </div>
                 </div>
@@ -278,11 +176,11 @@
                     <div class="memorial-view-top">
                         <p class="tribute__initials">GA</p>
                         <div class="tribute__poster post-link">
-                            <h6 class="tribute__name">Gharham Anali</h6>
+                            <h6 class="tribute__name">{{$detail->users->name}}</h6>
                             <div class="tribute__line">
-                                <p class="tribute__user">Administrator</p>
+                                <p class="tribute__user">{{$detail->users->role}}</p>
                                 <span class="dot-status"></span>
-                                <div class="tribute__date">15 Oct 2021</div>
+                                <div class="tribute__date">{{$detail->created_at->toDateString()}}</div>
                             </div>
                         </div>
                         <div class="top-link">
@@ -324,7 +222,7 @@
                                                 </div>
                                                 <div class="story-card__post">
                                                     <p class="memorial-card-content">
-                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, Johnson Magbodo is one of the most outstanding minds of modern Asia. He is the  foremost of the Telugu poets today who has turned poetry to the gigantic strides of human history and embellished literature with the thrills and triumphs of the 20th Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat non tenetur eaque possimus sit sed, quam quo error. Consequuntur facilis in porro quis molestiae ab dolorum ratione expedita veritatis corporis! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, dolore incidunt quas deleniti minima animi accusamus optio velit modi hic? Pariatur excepturi maiores consequatur praesentium odio alias reiciendis sint asperiores quisquam? Tempora officiis soluta explicabo sint tempore fugiat rerum atque ipsa sapiente. Reiciendis veniam expedita praesentium assumenda, est atque numquam magnam nisi impedit eveniet, laborum optio. Amet laboriosam reprehenderit alias natus vitae est error. A, quisquam? Nostrum at quasi, ducimus, laudantium amet repudiandae molestiae porro suscipit delectus, doloremque non minus sequi ullam? Ducimus minima nobis, doloribus ipsum praesentium minus ut numquam cupiditate, natus vitae perspiciatis cum impedit sapiente culpa dolore harum necessitatibus.
+                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia. He is the  foremost of the Telugu poets today who has turned poetry to the gigantic strides of human history and embellished literature with the thrills and triumphs of the 20th Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat non tenetur eaque possimus sit sed, quam quo error. Consequuntur facilis in porro quis molestiae ab dolorum ratione expedita veritatis corporis! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, dolore incidunt quas deleniti minima animi accusamus optio velit modi hic? Pariatur excepturi maiores consequatur praesentium odio alias reiciendis sint asperiores quisquam? Tempora officiis soluta explicabo sint tempore fugiat rerum atque ipsa sapiente. Reiciendis veniam expedita praesentium assumenda, est atque numquam magnam nisi impedit eveniet, laborum optio. Amet laboriosam reprehenderit alias natus vitae est error. A, quisquam? Nostrum at quasi, ducimus, laudantium amet repudiandae molestiae porro suscipit delectus, doloremque non minus sequi ullam? Ducimus minima nobis, doloribus ipsum praesentium minus ut numquam cupiditate, natus vitae perspiciatis cum impedit sapiente culpa dolore harum necessitatibus.
                                                     </p>
                                                     <button class="memorial-card-button">Read More</button>
                                                 </div>
@@ -361,7 +259,7 @@
                                                 </div>
                                                 <div class="story-card__post">
                                                     <p class="memorial-card-content">
-                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, Johnson Magbodo is one of the most outstanding minds of modern Asia.
+                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia.
                                                     </p>
                                                     <button class="memorial-card-button">Read More</button>
                                                 </div>
@@ -398,7 +296,7 @@
                                                 </div>
                                                 <div class="story-card__post">
                                                     <p class="memorial-card-content">
-                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, Johnson Magbodo is one of the most outstanding minds of modern Asia.
+                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia.
                                                     </p>
                                                     <button class="memorial-card-button">Read More</button>
                                                 </div>
@@ -410,48 +308,14 @@
                                     <a href="#" class="load-tributes-button">Load More Tributes...</a>
                                 </div>
                             </div>
-                            <div class="memorial-view__right">
-                                <div class="memorial-view-cards">
-                                    <div class="card-share-memorial">
-                                        <div class="card-share-memorial__top">
-                                            <h6 class="card-heading">Share Memorial</h6>
-                                        </div>
-                                    <div class="card-share-memorial__content">
-                                        <p class="card-share-memorial__text">
-                                            Share memorial with Johnson’s family and friends
-                                        </p>
-                                        <div class="card-share-memorial__socials">
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/ig-memorial.svg" alt="instagram" class="tribute-details__icon"></a>
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="whatsapp" class="tribute-details__icon"></a>
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="twitter" class="tribute-details__icon"></a>
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/facebook-memorial.svg" alt="facebook" class="tribute-details__icon"></a>
-                                        </div>
-                                        <div class="card-share-memorial__copy">
-                                            <a href="#" id="copy-content">ademolawa-johnson/createtribute.com</a>
-                                            <button id="btn-copy">
-                                                <img src="../../assets/img/copy-icon.svg" alt="Copy Icon">
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-small">
-                                    <p class="card-small__views">{{$detail->page_views}} View<span>@if ( $detail->page_views ==1)
-                                            @else s @endif</span></p>
-                                </div>
-                                <div class="card-small">
-                                    <p class="card-small__created-by">Created By</>
-                                    </p>
-                                    <h5 class="card-small__creator">Gharham Anali</h5>
-                                </div>
-                            </div>
-                        </div>
+                         @include('partials.memorial')
                     </div>
                 </div>
                 <div class="memorial-view-bottom">
                     <h5 class="memorial-view-heading">Post a tribute</h5>
                     <p class="memorial-view-login">
                         <a href="#" class="memorial-view-link">Log in</a>
-                        to post a tribute for Johnson Magbodi
+                        to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
                     </p>
                 </div>
             </div>
@@ -461,11 +325,11 @@
                     <div class="memorial-view-top">
                         <p class="tribute__initials">GA</p>
                         <div class="tribute__poster post-link">
-                            <h6 class="tribute__name">Gharham Anali</h6>
+                            <h6 class="tribute__name">{{$detail->users->name}}</h6>
                             <div class="tribute__line">
-                                <p class="tribute__user">Administrator</p>
+                                <p class="tribute__user">{{$detail->users->role}}</p>
                                 <span class="dot-status"></span>
-                                <div class="tribute__date">15 Oct 2021</div>
+                                <div class="tribute__date">{{$detail->created_at->toDateString()}}</div>
                             </div>
                         </div>
                         <div class="top-link">
@@ -507,7 +371,7 @@
                                                 </div>
                                                 <div class="tribute-view-card__post">
                                                     <p class="memorial-card-content">
-                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, Johnson Magbodo is one of the most outstanding minds of modern Asia.
+                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia.
                                                     </p>
                                                     <button class="memorial-card-button">Read More</button>
                                                 </div>
@@ -543,7 +407,7 @@
                                                 </div>
                                                 <div class="tribute-view-card__post">
                                                     <p class="memorial-card-content">
-                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, Johnson Magbodo is one of the most outstanding minds of modern Asia. A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, Johnson Magbodo is one of the most outstanding minds of modern Asia.
+                                                        A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia. A revolutionary poet who spurned the pedestrian and pedantic poetry equally, a brilliant critic and a scholar of Sanskrit, this versatile poet has breathed a new vision of modernity to his vernacular.Such minds place Telugu on the world map of intellectualism. Readers conversant with names like Paul Valery, Gauguin, and Dag Hammarskjold will have to add the name of Seshendra Sharma the writer from, {{$detail->first_name. ' ' .$detail->last_name}} is one of the most outstanding minds of modern Asia.
                                                     </p>
                                                     <button class="memorial-card-button">Read More</button>
                                                 </div>
@@ -555,48 +419,14 @@
                                     <a href="#" class="load-tributes-button">Load More Tributes...</a>
                                 </div>
                             </div>
-                            <div class="memorial-view__right">
-                                <div class="memorial-view-cards">
-                                    <div class="card-share-memorial">
-                                        <div class="card-share-memorial__top">
-                                            <h6 class="card-heading">Share Memorial</h6>
-                                        </div>
-                                    <div class="card-share-memorial__content">
-                                        <p class="card-share-memorial__text">
-                                            Share memorial with Johnson’s family and friends
-                                        </p>
-                                        <div class="card-share-memorial__socials">
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/ig-memorial.svg" alt="instagram" class="tribute-details__icon"></a>
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="whatsapp" class="tribute-details__icon"></a>
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/whatsapp-memorial.svg" alt="twitter" class="tribute-details__icon"></a>
-                                            <a href="#" class="tribute-details__link"><img src="../../assets/img/facebook-memorial.svg" alt="facebook" class="tribute-details__icon"></a>
-                                        </div>
-                                        <div class="card-share-memorial__copy">
-                                            <a href="#" id="copy-content">ademolawa-johnson/createtribute.com</a>
-                                            <button id="btn-copy">
-                                                <img src="../../assets/img/copy-icon.svg" alt="Copy Icon">
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-small">
-                                    <p class="card-small__views">{{$detail->page_views}} View<span>@if ( $detail->page_views ==1)
-                                            @else s @endif</span></p>
-                                </div>
-                                <div class="card-small">
-                                    <p class="card-small__created-by">Created By</>
-                                    </p>
-                                    <h5 class="card-small__creator">Gharham Anali</h5>
-                                </div>
-                            </div>
-                        </div>
+                         @include('partials.memorial')
                     </div>
                 </div>
                 <div class="memorial-view-bottom">
                     <h5 class="memorial-view-heading">Post a tribute</h5>
                     <p class="memorial-view-login">
                         <a href="#" class="memorial-view-link">Log in</a>
-                        to post a tribute for Johnson Magbodi
+                        to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
                     </p>
                 </div>
             </div>

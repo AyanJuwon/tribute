@@ -51,7 +51,7 @@
                             <img src="/assets/img/google.svg" alt="Google" class="continue-button__img">
                             Continue with Google
                         </a>
-                        <a href="#" class="continue-button">
+                        <a href="{{route('facebookLogin' , 'facebook')}}" class="continue-button">
                             <img src="/assets/img/facebook-form.svg" alt="Google" class="continue-button__img">
                             Continue with Facebook
                         </a>

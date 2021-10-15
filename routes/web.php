@@ -30,9 +30,11 @@ Route::get('memorial-view/{slug}', 'MemorialController@viewMemorial')->name('vie
 
 Auth::routes();
 
-Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social', 'twitter|facebook|linkedin|google');
+Route::get('login/{provider}/callback','SocialController@Callback')->name('facebookLogin');
 
-Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social', 'twitter|facebook|linkedin|google');
+// Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social', 'twitter|facebook|linkedin|google');
+
+// Route::get('/login/{social}/callback','Auth\LoginController@handleProviderCallback')->where('social', 'twitter|facebook|linkedin|google');
 
 //Route::get('forgot_password', 'ForgotPasswordController@showLinkRequestForm/{token}')->name('password.reset');
 

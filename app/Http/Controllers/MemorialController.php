@@ -146,8 +146,13 @@ if($request->plan_type != 'free'){
     }
 
     public function viewMemorial($slug){
+        $stories = Story::where('slug',$slug)->get();
+        $tributes = Tribute::where('slug',$slug)->get();
+        $lives = Life::where('slug',$slug)->get();
+        $images = AddImages::where('slug',$slug)->get();
         
         $detail = Memorial::where('slug', $slug)->firstOrFail();
+        
          $detail->page_views ++;
         $detail->save();
         // $detail->update()
