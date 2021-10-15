@@ -1,0 +1,38 @@
+
+.container {
+    max-width: 110rem;
+    margin: 0 auto;
+    //padding: 0 3.2rem;
+}
+
+.pricing-container {
+    max-width: 100rem;
+    margin: 0 auto;
+}
+
+.memorial-view-container {
+    margin: 0 auto;
+    max-width: 120rem;
+}
+
+.panel-container {
+    max-width: 90rem;
+}
+
+.profile-container {
+    max-width: 120rem;
+    margin: 0 auto;
+    padding: 3em;
+
+    &--pages {
+        padding: 3rem 0 3rem 0;
+    }
+}
+
+.sub-container {
+    max-width: 80rem;
+}
+
+.text-center {
+    text-align: center;
+}

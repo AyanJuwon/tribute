@@ -1,0 +1,85 @@
+select first_name ||' '|| last_name as "fullname", salary "Monthly salary", salary*12 "Annual salary" from employees;
+
+select first_name ||' '|| last_name || ' receives ' || salary || 'dollars monthly and that amounts to' || salary*12 || ' yearly ' "employee disscription" from employees
+
+select lower(first_name) "Employee name" from employees;
+
+select distinct salary from employees where salary>5000
+
+select rpad(salary, 6, '$') "Employee name" from employees;
+
+'' for concatenation
+"" for alias
+
+upper()
+lower()
+initpad()
+rpad()
+sum()
+select substr(first_name, 3, 6) "Employee name" from employees;
+
+number functions
+
+date functions
+
+select * from employees where employee_id between 100 and 120
+
+select * from employees where employee_id <> 101 and employee_id <> 106
+
+select * from employees where employee_id in (!15,116,114,107,111)
+
+select * from employees where first_name like 'L%'
+
+select * from employees where first_name like '%a_'
+
+select * from employees where employee_id notin/in (102,105) and/or commission_pct is null
+
+precedence
+arithmrtic operators
+concatenation operators
+comparison operators
+is(not) null like(not), in
+(not)between
+not equal to
+not logical conditions
+and logical conditions
+or logical conditions
+
+select department_id, first_name, last_name from employees order by department_id,first_name	
+
+select department_id, upper(first_name) first_name, concat('Hello' ,last_name)
+
+select sysdate from dual;
+
+select first_name, months_between(sysdate,hire_date) as 'Months spent'
+
+Null value
+select first_name ||' '|| last_name as Fullname, job_id, salary, commission_pct,salary+nvl(commission_pct,0) Full_salary from employees
+
+select first_name ||' '|| last_name as Fullname, job_id, salary, commission_pct,salary+nvl(commission_pct,0) Full_salary, nvl2(commission_pct, 'Takes both salary', 'Salary') from employees
+
+group by
+select job_id, sum(salary) from employees group by job_id
+
+join
+select first_name, last_name , department_name from employees join departments on(employees.department_id = departments.department_id) 
+
+select first_name, last_name, street_address, city from employees join departments using(department_id) join locations using(location_id)
+
+Employee Details 
+select first_name ||' '|| last_name ||' takes '|| salary || ' per month as an ' || job_id || ' at the ' || department_name || ' department ' ||' ' || street_address ||' '|| city|| ' ' || state_province || ' , ' || country_name || ' , ' || region_name "EMPLOYEE DESCRIPTION" from employees join departments on(employees.department_id = departments.department_id) join locations on(departments.location_id = locations.location_id) join countries on(locations.country_id = countries.country_id) join regions on(countries.region_id = regions.region_id)
+
+rectangular - to describe entity
+oval shape - to describe attribute
+diamond - when entities are related
+
+types of relationship
+1 - 1 relationship
+many to many relationship
+1 to many relationship
+many to 1 relationship
+
+outer join
+full outer join
+left outer join
+right outer join

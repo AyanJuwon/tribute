@@ -1,0 +1,74 @@
+.payment-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 4.5rem 0;
+    border-radius: 2rem;
+    overflow: hidden;
+
+    &__table-head {
+        background-color: #FCFBFB;
+    }
+
+    &__table-row {
+        text-align: left;
+    }
+
+    &__head-title {
+        font-size: 2rem;
+        font-weight: 600;
+        padding: 2rem 1.5rem;
+    }
+
+    &__table-body {
+        background-color: #F5F5F5;
+    }
+
+    &__table-body &__table-row:nth-of-type(even) {
+        background-color: #FCFBFB;
+    }
+
+    &__table-data {
+        font-size: 1.5rem;
+        padding: 1.8rem 1.5rem;
+    }
+}
+
+.table-check-head {
+    padding: 2rem 1.6rem;
+}
+
+.table-check-body {
+    padding: 1.8rem 1.6rem;
+}
+
+.table-check {
+    cursor: pointer;
+
+    input {
+        display: none;
+    }
+}
+
+.table-checkmark {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 2px solid #E7E1E1;
+    border-radius: .5rem;
+    display: inline-block;
+    position: relative;
+}
+
+[type = 'checkbox']:checked + .table-checkmark {
+    background-color: var(--primary-color);
+}
+
+[type = 'checkbox']:checked + .table-checkmark::before {
+    position: absolute;
+    //content: '\2713';
+    content: url('/assets/img/tick-icon.svg');
+    top: 3.5px;
+    left: 6.2px;
+    font-weight: 600;
+    color: white;
+}
+
