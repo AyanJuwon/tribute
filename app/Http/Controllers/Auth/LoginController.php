@@ -74,7 +74,7 @@ class LoginController extends Controller
                 break;
             default:
                 Auth::logout();
-                return redirect(Session::get('backUrl') ? Session::get('backUrl') : $this->redirectTo);
+                return redirect(Session::get('backUrl') ? Session::get('backUrl') : redirect('/landing'));
                 break;
         }
     }

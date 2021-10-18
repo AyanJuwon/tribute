@@ -38,11 +38,11 @@
                    @foreach($details as $detail)
                         <div class="tribute">
                             <div class="tribute__owner">
-                                <p class="tribute__initials">GA</p>
+                                <p class="tribute__initials">{{$detail->getInitials($detail->users->name)}}</p>
                                 <div class="tribute__poster">
-                                    <h6 class="tribute__name">{{$detail->first_name. ' ' . $detail->last_name}}</h6>
+                                    <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                     <div class="tribute__line">
-                                        <p class="tribute__user">{{auth()->user()->name}}</p>
+                                        <p class="tribute__user">{{$detail->users->role}}</p>
                                         <span class="dot-status"></span>
                                         <div class="tribute__date">{{$detail->created_at->toDateString()}}</div>
                                     </div>
@@ -99,38 +99,41 @@
                        
                     </div>
                     <aside class="memorials-content__right">
+                        
+                            {{-- @foreach ($mostViewed as $mostViewed ) --}}
+                        
                         <h4 class="aside-heading">Most Viewed Tribute</h4>
                         <div class="top-tribute">
                             <div class="top-tribute__card-img">
                                 <img src="../../assets/img/top-memorial-img.png" alt="Most Viewed Tribute" class="top-tribute__img">
-                                <a href="#" class="top-tribute__btn">Visit Memorial</a>
+                                <a href="{{route('viewMemorial',$mostViewed->slug)}}" class="top-tribute__btn">Visit Memorial</a>
                             </div>
                             <div class="top-tribute__content">
                                 <div class="top-tribute__details">
                                     <div class="top-tribute__box">
-                                        <p class="top-tribute__initials">MJ</p>
-                                        <div class="top-tribute__poster">
-                                            <h6 class="top-tribute__name">Kumar Dhaar</h6>
+                                        <p class="top-tribute__initials">{{$mostViewed->getInitials($mostViewed->users->name)}}</p>
+                                           <div class="top-tribute__poster">
+                                            <h6 class="top-tribute__name">{{$mostViewed->users->name}}</h6>
                                             <div class="top-tribute__line">
-                                                <p class="top-tribute__user">Administrator</p>
+                                                <p class="top-tribute__user">{{$mostViewed->users->role}}</p>
                                                 <span class="dot-status"></span>
-                                                <div class="top-tribute__date">15 Oct 2021</div>
+                                                <div class="top-tribute__date">{{$mostViewed->created_at->toDateString()}}</div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div class="top-tribute__top">
-                                        <h6 class="top-tribute__fullname">Mary Olufemi</h6>
-                                        <p class="top-tribute__date-range">02/09/1980 - 19/08/2021</p>
+                                        <h6 class="top-tribute__fullname">{{$mostViewed->first_name. ' '. $mostViewed->last_name}}</h6>
+                                        <p class="top-tribute__date-range">{{$mostViewed->born_date->toDateString()}} - {{$mostViewed->passed_away_date->toDateString()}}</p>
                                     </div>
                                     <div class="top-tribute__bottom">
                                         <p class="top-tribute__text">
                                             This memorial website was created in memory of our loved one, Magbodi Johnson 80 years old , born on Sept 02, 1980 and passed away on Aug 19, 2021. We will remember him forever.
                                         </p>
                                         <div class="top-tribute__info">
-                                            <p class="top-tribute__views">1,289 Views</p>
+                                            <p class="top-tribute__views">{{$mostViewed->page_views}} Views</p>
                                             <span class="dot-status"></span>
-                                            <p class="top-tribute__tribute-number">80 Tributes</p>
+                                            <p class="top-tribute__tribute-number">{{\App\Tribute::getTributeBySlug($mostViewed->slug)}} Tributes</p>
                                         </div>
                                     </div>
                                 </div>

@@ -18,6 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('assets/js/script.js')}}">
+    <script src="{{asset('assets/js/index.js')}}" defer></script>
     @yield('css')
     <title>@yield('title')</title>
 </head>
@@ -49,9 +50,13 @@
         <nav class="main-nav">
             <ul class="main-nav__list">
                 <li><a href="{{route('landing')}}" class="main-nav__link active">Home</a></li>
+                
+                <li><a href="#" class="main-nav__link">How It Works</a></li>
                 <li><a href="/main/userProfile/dashboard.html" class="main-nav__link">Pricing</a></li>
-                <li><a href="#" class="main-nav__link">FAQ</a></li>
+                <li><a href="{{route('faq')}}" class="main-nav__link">FAQ</a></li>
                 <li><a href="{{route('memorials')}}" class="main-nav__link">Memorials</a></li> 
+                
+                <li><a href="{{route('contact')}}" class="main-nav__link">Contact Us</a></li> 
             </ul>
             <ul class="main-nav__cta">
                 @if (auth()->user())
@@ -90,17 +95,17 @@
                 <p class="footer-heading">Company</p>
                 <ul class="footer-nav">
                     <li><a href="/main/landingPage/about.html" class="footer-link">About us</a></li>
-                    <li><a href="#" class="footer-link">Contact us</a></li>
-                    <li><a href="#" class="footer-link">Pricing</a></li>
+                    <li><a href="{{route('contact')}}" class="footer-link">Contact us</a></li>
+                    <li><a href="{{route('pricing')}}" class="footer-link">Pricing</a></li>
                 </ul>
             </nav>
             <nav class="col-nav">
                 <p class="footer-heading">Support</p>
                 <ul class="footer-nav">
                     <li><a href="#" class="footer-link">Help center</a></li>
-                    <li><a href="#" class="footer-link">Terms of service</a></li>
+                    <li><a href="{{route('terms')}}" class="footer-link">Terms of service</a></li>
                     <li><a href="#" class="footer-link">Legal</a></li>
-                    <li><a href="#" class="footer-link">Privacy policy</a></li>
+                    <li><a href="{{route('policy')}}" class="footer-link">Privacy policy</a></li>
                 </ul>
             </nav>
             <div class="subscribe-col">

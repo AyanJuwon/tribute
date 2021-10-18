@@ -7,7 +7,7 @@ use Intervention\Image\Facades\Image;
 
 Route::get('/programme','HomeController@programme')->name('program');
 
-Route::get('/privacypolicy','HomeController@policy')->name('pandp');
+Route::get('/privacypolicy','HomeController@policy')->name('policy');
 
 Route::get('howitworks', 'HomeController@howitworks')->name('howitworks');
 
@@ -30,7 +30,13 @@ Route::get('memorial-view/{slug}', 'MemorialController@viewMemorial')->name('vie
 
 Auth::routes();
 
-Route::get('login/{provider}/callback','SocialController@Callback')->name('facebookLogin');
+
+Route::get('social-auth/{provider}/callback','SocialController@providerCallback');
+
+Route::get('social-auth/{provider}','SocialController@redirectToProvider')->name('socialLogin');
+
+// Route::get('login/{provider}','SocialController@Callback')->name('socialLogin');
+// Route::get('login/{provider}/callback','SocialController@Callback')->name('socialLoginCallback');
 
 // Route::get('/login/{social}','Auth\LoginController@socialLogin')->where('social', 'twitter|facebook|linkedin|google');
 
@@ -133,6 +139,7 @@ Route::middleware(['auth', 'check-id'])->group(function(){
 });
 
 Route::middleware(['auth'])->group(function (){
+    Route::get('/complete-registration','SocialController@completeRegistrationPage')->name('completeRegistration');
 
     Route::get('/memorials', 'MemorialController@memorials')->name('memorials');
 
@@ -144,8 +151,12 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('/update-password', 'MemorialController@changePassword')->name('change.password');
 
+    Route::post('tribute/create-tribute', 'TributeController@store')->name('tribute.store');
+
     Route::delete('tribute/{tribute}', 'TributeController@destroy')->name('tribute.destroy');
 
+    Route::post('story/create-story', 'StoriesController@store')->name('stories.store');
+    
     Route::delete('story/{story}', 'StoriesController@destroy')->name('stories.destroy');
 
     Route::delete('image/{image}', 'ImageController@destroy')->name('image.destroy');

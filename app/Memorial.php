@@ -24,6 +24,21 @@ class Memorial extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
+    public function life(){
+        return $this->belongsTo(memorial::class, 'slug');
+    }
+
+    
+    public function getInitials($stringName){
+     $names = explode(" ", $stringName);
+            $first_name = $names[0];
+            $last_name = $names[1];
+            
+        $fr = strtoupper($first_name);
+        $ln = strtoupper($last_name);
+        $initials = $fr[0].$ln[0];
+    return $initials;
+}
     public function payment(){
         return $this->hasOne(Payment::class, 'memorial_id');
     }

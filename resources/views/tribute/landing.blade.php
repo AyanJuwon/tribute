@@ -26,7 +26,7 @@
                     <p class="hero-text">
                         Create beautiful memories of your loved ones, share stories, photos, send condolences and write tributes to preserve their legacies.
                     </p>
-                    <a href="#" class="hero-btn">Create A Memorial</a>
+                    <a href="{{route('createMemorial')}}" class="hero-btn">Create A Memorial</a>
                 </div>
                 <div class="hero-container__right">
                     <img src="{{asset('assets/img/hero-img.png')}}" alt="Hero" class="hero-img">
@@ -98,19 +98,22 @@
             <h3 class="section__header">Recent Memorials</h3>
     
             <div class="slides-container">
+                @foreach ($memorials as $memorial )
+                    
+               
                 <div class="slides slides--1">
                     <div class="slide">
                         <div class="memorial">
                             <div class="memorial__card">
                                 <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">Adewale Isreal</p>
+                                <p class="memorial__text">{{$memorial->first_name. ' ' .$memorial->last_name}}</p>
                                 <blockquote class="memorial__quote">
-                                    Let the Memory of Adewale Isreal be with us forever
+                                    Let the Memory of {{$memorial->first_name. ' ' .$memorial->last_name}} be with us forever
                                 </blockquote>
                             </div>
                             <div class="memorial__details">
-                                <p class="memorial__date">02/09/1980 - 19/08/2021</p>
-                                <a href="#" class="memorial__link">Visit Memorial</a>
+                                <p class="memorial__date">{{$memorial->born_date->toDateString()}} - {{$memorial->passed_away_date->toDateString()}}</p>
+                                <a href="{{route('viewMemorial',$memorial->slug)}}" class="memorial__link">Visit Memorial</a>
                             </div>
                         </div>
                     </div>
@@ -119,86 +122,22 @@
                         <div class="memorial">
                             <div class="memorial__card">
                                 <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">Adewale Isreal</p>
+                                <p class="memorial__text">{{$memorial->first_name. ' ' .$memorial->last_name}}</p>
                                 <blockquote class="memorial__quote">
-                                    Let the Memory of Adewale Isreal be with us forever
+                                    Let the Memory of {{$memorial->first_name. ' ' .$memorial->last_name}} be with us forever
                                 </blockquote>
                             </div>
                             <div class="memorial__details">
-                                <p class="memorial__date">02/09/1980 - 19/08/2021</p>
-                                <a href="#" class="memorial__link">Visit Memorial</a>
+                                <p class="memorial__date">{{$memorial->born_date->toDateString()}} - {{$memorial->passed_away_date->toDateString()}}</p>
+                                <a href="{{route('viewMemorial',$memorial->slug)}}" class="memorial__link">Visit Memorial</a>
                             </div>
                         </div>
                     </div>
                 </div>
     
-                <div class="slides slides--2">
-                    <div class="slide">
-                        <div class="memorial">
-                            <div class="memorial__card">
-                                <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">Adewale Isreal</p>
-                                <blockquote class="memorial__quote">
-                                    Let the Memory of Adewale Isreal be with us forever
-                                </blockquote>
-                            </div>
-                            <div class="memorial__details">
-                                <p class="memorial__date">02/09/1980 - 19/08/2021</p>
-                                <a href="#" class="memorial__link">Visit Memorial</a>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="slide">
-                        <div class="memorial">
-                            <div class="memorial__card">
-                                <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">Adewale Isreal</p>
-                                <blockquote class="memorial__quote">
-                                    Let the Memory of Adewale Isreal be with us forever
-                                </blockquote>
-                            </div>
-                            <div class="memorial__details">
-                                <p class="memorial__date">02/09/1980 - 19/08/2021</p>
-                                <a href="#" class="memorial__link">Visit Memorial</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
     
-                <div class="slides slides--3">
-                    <div class="slide">
-                        <div class="memorial">
-                            <div class="memorial__card">
-                                <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">Adewale Isreal</p>
-                                <blockquote class="memorial__quote">
-                                    Let the Memory of Adewale Isreal be with us forever
-                                </blockquote>
-                            </div>
-                            <div class="memorial__details">
-                                <p class="memorial__date">02/09/1980 - 19/08/2021</p>
-                                <a href="#" class="memorial__link">Visit Memorial</a>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="slide">
-                        <div class="memorial">
-                            <div class="memorial__card">
-                                <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">Adewale Isreal</p>
-                                <blockquote class="memorial__quote">
-                                    Let the Memory of Adewale Isreal be with us forever
-                                </blockquote>
-                            </div>
-                            <div class="memorial__details">
-                                <p class="memorial__date">02/09/1980 - 19/08/2021</p>
-                                <a href="#" class="memorial__link">Visit Memorial</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                 @endforeach
     
                 <div class="dots"></div>
             </div>
@@ -354,7 +293,7 @@
             <p class="section-sub-heading section-sub-heading--white section-cta__text">
                 Honor and remember those who have died, by creating an online memorial page, leave tributes, share stories, images and much more in few easy steps
             </p>
-            <a href="#" class="cta-button">Create a Memorial</a>
+            <a href="{{route('createMemorial')}}" class="cta-button">Create a Memorial</a>
         </section>
 
         <section class="section-faq">

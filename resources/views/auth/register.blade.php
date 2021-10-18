@@ -10,16 +10,15 @@
            @section('side-text')
                 <h1 class="box__text">Celebrate <br> the life of <br> loved ones.</h1>
            @endsection
-                    @include('partials.list_error')
                     @section('auth-form')
                           <form method="POST" action="{{ route('register') }}">
                         @csrf
                             <div class="form-sign__group">
                                   
                             @if(!empty($first_name))
-                            <input class="form-sign__input" @error('first_name') is-invalid @enderror" name="first_name" value="{{ $first_name }}" required autocomplete="name" autofocus placeholder="First name" type="text">
+                            <input class="form-sign__input @error('first_name') is-invalid @enderror" name="first_name" value="{{ $first_name }}" required autocomplete="name" autofocus placeholder="First name" type="text">
                             @else
-                            <input class="form-sign__input" @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="name" autofocus placeholder="First name" type="text">
+                            <input class="form-sign__input @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="name" autofocus placeholder="First name" type="text">
                             @endif
 
                             @error('first_name')
@@ -33,9 +32,9 @@
 
                             <div class="form-sign__group">         
                             @if(!empty($last_name))
-                            <input class="form-sign__input" @error('last_name') is-invalid @enderror name="last_name" value="{{ $last_name }}" required autocomplete="last_name" autofocus placeholder="Last name" type="text">
+                            <input class="form-sign__input @error('last_name') is-invalid @enderror" name="last_name" value="{{ $last_name }}" required autocomplete="last_name" autofocus placeholder="Last name" type="text">
                             @else
-                            <input class="form-sign__input" @error('last_name') is-invalid @enderror name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus placeholder="Last name" type="text">
+                            <input class="form-sign__input @error('last_name') is-invalid @enderror"  name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name" autofocus placeholder="Last name" type="text">
                             @endif
 
                             @error('name')
@@ -69,15 +68,15 @@
                                 <select id="country" name="country" class="form-sign__select @error('country') is-invalid @enderror">
                                     
 										<option selected disabled>Select Country</option>
-                                 <option value="nigeria">Nigeria</option>
-                                    <option value="nigeria">Australia</option>
+                                 <option value="Nigeria">Nigeria</option>
+                                    <option value="Australia">Australia</option>
                                 </select>
                             @else
                                         <select id="country" name="country" class="form-sign__select @error('country') is-invalid @enderror">
                                             
 										<option selected disabled>Select Country</option>
-                                           <option value="nigeria">Nigeria</option>
-                                    <option value="nigeria">Australia</option>
+                                           <option value="Nigeria">Nigeria</option>
+                                    <option value="Australia">Australia</option>
                                         </select>
                             @endif
 

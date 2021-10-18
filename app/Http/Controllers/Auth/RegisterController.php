@@ -88,7 +88,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'ip_address' => \request()->ip(),
-            'location' => 'Abuja/Nigeria',
+            'location' => $data['country'],
             'role' => 'user',
             'country' => $data['country'],
         ]);

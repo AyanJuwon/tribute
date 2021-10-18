@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Mail\BannedMemorial;
 use App\Mail\MemorialMail;
 use App\Memorial;
+use App\Stories;
+use App\Tribute;
+use App\Life;
+use App\AddImages;
 use App\Payment;
 use Carbon\Carbon;
 use App\User;
@@ -34,7 +38,6 @@ class MemorialController extends Controller
             $names = explode(" ", $stringName);
             $first_name = $names[0];
             $last_name = $names[1];
-            
 
         $fr = strtolower($first_name);
         $ln = strtolower($last_name);
@@ -118,7 +121,16 @@ if($request->plan_type != 'free'){
         return view('tribute.createMemorial')
             ->with('memorials', Memorial::orderBy('created_at', 'desc')->where('active', true)->take(3)->get());
     }
-
+public function getInitials($stringName){
+     $names = explode(" ", $stringName);
+            $first_name = $names[0];
+            $last_name = $names[1];
+            
+        $fr = strtoupper($first_name);
+        $ln = strtoupper($last_name);
+        $initials = $fr[0].$ln[0];
+    return $initials;
+}
     public function myaccount($id){
         $user = User::where('id', $id)->firstOrFail();
 //        $user = User::findOrFail($id);
@@ -136,9 +148,12 @@ if($request->plan_type != 'free'){
     public function memorials(){
         $details = Memorial::where('created_by', auth()->user()->id)->get();
         $count = Memorial::where('created_by', auth()->user()->id)->count();
+        $mostViewed = Memorial::where('active',true)->where('page_views',Memorial::max('page_views'))->first();
+        // dd($mostViewed);
 //        $payment = Payment::getPayment();
         return view('accounts.memorials')
             ->with('details', $details)
+            ->with('mostViewed', $mostViewed)
             ->with('memorials', Memorial::orderBy('created_at', 'desc')->where('active', true)->take(3)->get())
             ->with('count', $count);
 //            ->with('payment', $payment);
@@ -146,7 +161,7 @@ if($request->plan_type != 'free'){
     }
 
     public function viewMemorial($slug){
-        $stories = Story::where('slug',$slug)->get();
+        $stories = Stories::where('slug',$slug)->get();
         $tributes = Tribute::where('slug',$slug)->get();
         $lives = Life::where('slug',$slug)->get();
         $images = AddImages::where('slug',$slug)->get();
@@ -156,7 +171,11 @@ if($request->plan_type != 'free'){
          $detail->page_views ++;
         $detail->save();
         // $detail->update()
-        return view('tribute.memorialView')->with('detail',$detail);
+        return view('tribute.memorialView')->with([
+            'detail'=>$detail,
+            'tributes'=>$tributes,
+            'lives'=> $lives,
+            'images'=>$images,]);
     }
 
     public function update(Request $request, $id){

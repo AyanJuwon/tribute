@@ -38,7 +38,7 @@
                                         <div class="card-small">
                                             <p class="card-small__created-by">Created By</>
                                             </p>
-                                            <h5 class="card-small__creator">{{$detail->user}}</h5>
+                                            <h5 class="card-small__creator">{{$detail->users->name}}</h5>
                                         </div>
                                     </div>
                                 </div>

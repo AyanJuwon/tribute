@@ -47,7 +47,7 @@
                         <div class="memorial-view-top">
                             <p class="tribute__initials">GA</p>
                             <div class="tribute__poster">
-                                <h6 class="tribute__name">{{$detail->users->name}}}</h6>
+                                <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                 <div class="tribute__line">
                                     <p class="tribute__user">{{$detail->users->role}}</p>
                                     <span class="dot-status"></span>
@@ -75,10 +75,65 @@
 
                         <div class="memorial-view-bottom">
                             <h5 class="memorial-view-heading">Post a tribute</h5>
+                            @if (auth()->user())
+                                 <form method="POST" action="{{ route('tributes.save', $detail->slug) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel-group accordion" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="accordion-heading">
+                                                        <h4 class="accordion-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                                Type your Tribute
+                                                                <i class="indicator fa fa-chevron-down"></i>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                                        <div class="panel-body">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" cols="30" rows="10" placeholder="Type your Tribute......" name="tribute"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="accordion-heading">
+                                                        <h4 class="accordion-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                                Or Upload Documents, Only (*.docx, *.doc, *.pdf, *.txt) formats
+                                                                <i class="indicator fa fa-chevron-right"></i></a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Upload your tribute (document) </label>
+                                                                    <br><br>
+                                                                    <input name="docs" type="file" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn search-btn" style="background-color: #65594d;color:white">Publish</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            @else
                             <p class="memorial-view-login">
                                 <a href="#" class="memorial-view-link">Log in</a>
                                 to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
-                            </p>
+                            </p>@endif
                         </div>
                     </div>
                 </div>
@@ -167,6 +222,53 @@
                                 </div>
                                @include('partials.memorial')
                         </div>
+                        <div class="memorial-view-bottom">
+
+                            
+                            <h5 class="memorial-view-heading">Post an Image</h5>
+                            @if (!auth()->user())
+                            <p class="memorial-view-login">
+                                <a href="{{route('login')}}" class="memorial-view-link">Log in</a>
+                                to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
+                            </p>
+                            @else
+                            <form method="POST" action="{{ route('image.save', $detail->slug) }}" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="panel-group accordion" id="accordion">
+                                                                    <div class="panel panel-default">
+                                                                        <div class="accordion-heading">
+                                                                            <h4 class="accordion-title">
+                                                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                                                    Image
+                                                                                    <i class="indicator fa fa-chevron-down"></i>
+                                                                                </a>
+                                                                            </h4>
+                                                                        </div>
+                                                                        <div id="collapseOne" class="panel-collapse collapse in">
+                                                                            <div class="panel-body">
+                                                                                <div class="col-md-12 col-sm-12">
+                                                                                    <div class="form-group">
+                                                                                        <input type="file" name="image" class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-12 col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <button type="submit" class="btn search-btn" style="background-color: #65594d;color:white">Publish</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                            
+                        
+                            @endif
+</div>
                     </div>
                 </div>
             </div>
@@ -312,11 +414,38 @@
                     </div>
                 </div>
                 <div class="memorial-view-bottom">
-                    <h5 class="memorial-view-heading">Post a tribute</h5>
-                    <p class="memorial-view-login">
-                        <a href="#" class="memorial-view-link">Log in</a>
-                        to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
-                    </p>
+                    
+                            <h5 class="memorial-view-heading">Post a Story</h5>
+                            @if (!auth()->user())
+                            <p class="memorial-view-login">
+                                <a href="{{route('login')}}" class="memorial-view-link">Log in</a>
+                                to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
+                            </p>
+                            @else
+                           <form method="POST" action="{{ route('stories.save', $slug) }}" enctype="multipart/form-data">
+                                    @csrf
+
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <textarea name="story" class="form-control" cols="30" rows="10" placeholder="Tell a story....."></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <label>Image(Optional)</label>
+                                                <br><br>
+                                                <input name="image" type="file" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <div class="form-group">
+                                                <button class="btn search-btn" style="background-color: #65594d;color:white">Publish</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            @endif
                 </div>
             </div>
             </div>
@@ -423,12 +552,68 @@
                     </div>
                 </div>
                 <div class="memorial-view-bottom">
-                    <h5 class="memorial-view-heading">Post a tribute</h5>
-                    <p class="memorial-view-login">
-                        <a href="#" class="memorial-view-link">Log in</a>
-                        to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
-                    </p>
-                </div>
+                            <h5 class="memorial-view-heading">Post a tribute</h5>
+                            @if (auth()->user())
+                                 <form method="POST" action="{{ route('tributes.save', $detail->slug) }}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel-group accordion" id="accordion">
+                                                <div class="panel panel-default">
+                                                    <div class="accordion-heading">
+                                                        <h4 class="accordion-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                                Type your Tribute
+                                                                <i class="indicator fa fa-chevron-down"></i>
+                                                            </a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                                        <div class="panel-body">
+                                                            <div class="col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <textarea class="form-control" cols="30" rows="10" placeholder="Type your Tribute......" name="tribute"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel panel-default">
+                                                    <div class="accordion-heading">
+                                                        <h4 class="accordion-title">
+                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                                Or Upload Documents, Only (*.docx, *.doc, *.pdf, *.txt) formats
+                                                                <i class="indicator fa fa-chevron-right"></i></a>
+                                                        </h4>
+                                                    </div>
+                                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                                        <div class="panel-body">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                                                <div class="form-group">
+                                                                    <label>Upload your tribute (document) </label>
+                                                                    <br><br>
+                                                                    <input name="docs" type="file" class="form-control">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12">
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn search-btn" style="background-color: #65594d;color:white">Publish</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            @else
+                            <p class="memorial-view-login">
+                                <a href="#" class="memorial-view-link">Log in</a>
+                                to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
+                            </p>@endif
+                        </div> 
+                
             </div>
         </div>
 

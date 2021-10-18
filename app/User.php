@@ -51,6 +51,10 @@ class User extends Authenticatable
         return $this->hasMany(Activity::class);
     }
 
+     public function socialAccounts(){
+        return $this->hasMany(socialAccount::class);
+    }
+    
     public function isAdmin()
     {
         return $this->role == 'admin';
