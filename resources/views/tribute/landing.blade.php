@@ -13,7 +13,7 @@
     Tribute - Home
 @endsection
 @section('css')
-    
+
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <script src="{{asset('assets/js/index.js')}}" defer></script>
 @endsection
@@ -56,12 +56,12 @@
 
                 <div class="work-item">
                     <img src="./assets/img/works-2.svg" alt="Create Memorial" class="work-item__img">
-                
+
                     <h4 class="work-item__heading">
                         Add Unlimited Content
                     </h4>
                     <p class="work-item__text">
-                        Including photos, life history <br> and memorial song, etc                    
+                        Including photos, life history <br> and memorial song, etc
                     </p>
                 </div>
 
@@ -93,31 +93,15 @@
                 </div>
             </div>
         </section>
-        
+
          <section class="section-slider section-slider-container">
             <h3 class="section__header">Recent Memorials</h3>
-    
+
             <div class="slides-container">
                 @foreach ($memorials as $memorial )
-                    
-               
-                <div class="slides slides--1">
-                    <div class="slide">
-                        <div class="memorial">
-                            <div class="memorial__card">
-                                <img src="./assets/img/pic.png" alt="" class="memorial__img">
-                                <p class="memorial__text">{{$memorial->first_name. ' ' .$memorial->last_name}}</p>
-                                <blockquote class="memorial__quote">
-                                    Let the Memory of {{$memorial->first_name. ' ' .$memorial->last_name}} be with us forever
-                                </blockquote>
-                            </div>
-                            <div class="memorial__details">
-                                <p class="memorial__date">{{$memorial->born_date->toDateString()}} - {{$memorial->passed_away_date->toDateString()}}</p>
-                                <a href="{{route('viewMemorial',$memorial->slug)}}" class="memorial__link">Visit Memorial</a>
-                            </div>
-                        </div>
-                    </div>
-            
+
+
+                <div class="slides slide">
                     <div class="slide">
                         <div class="memorial">
                             <div class="memorial__card">
@@ -134,16 +118,13 @@
                         </div>
                     </div>
                 </div>
-    
-               
-    
                  @endforeach
-    
+
                 <div class="dots"></div>
             </div>
         </section>
 
-        
+
 <section class="section-pricing">
             <h2 class="section-heading">Pricing & Features</h2>
             <p class="section-sub-heading">Create an online memorial in few easy steps</p>
@@ -215,7 +196,7 @@
 
                     <a href="#" class="card-button-white">Choose plan</a>
                 </div>
-                
+
                 <div class="card card--light">
                     <h3 class="card__heading">&#8358;20,000</h3>
                     <h4 class="card__subheading">Lifetime</h4>
@@ -248,6 +229,7 @@
 
                     <a href="#" class="card-button-light">Choose plan</a>
                 </div>
+            </div>
         </section>
 <section class="section-safe container">
             <div class="section-safe__left">
@@ -333,7 +315,7 @@
                             Click on the 'Sign Up' link at the top right of the page. You'll be asked to input some basic information about your loved one to get their memorial started. You will also have to fill out some information about yourself because you become the administrator of their memorial.
                         </div>
                     </div>
-                </div>    
+                </div>
                 <div class="all-faq__faq-tab faq">
                     <div class="all-faq__faq-contain">
                         <div class="all-faq__faq-question">How can I share memorial via email</div>
@@ -344,7 +326,7 @@
                             Click on the 'Sign Up' link at the top right of the page. You'll be asked to input some basic information about your loved one to get their memorial started. You will also have to fill out some information about yourself because you become the administrator of their memorial.
                         </div>
                     </div>
-                </div>    
+                </div>
                 <div class="all-faq__faq-tab faq">
                     <div class="all-faq__faq-contain">
                         <div class="all-faq__faq-question">How do I edit or remove memorial</div>
@@ -355,7 +337,7 @@
                             Click on the 'Sign Up' link at the top right of the page. You'll be asked to input some basic information about your loved one to get their memorial started. You will also have to fill out some information about yourself because you become the administrator of their memorial.
                         </div>
                     </div>
-                </div>    
+                </div>
                 <div class="all-faq__faq-tab faq">
                     <div class="all-faq__faq-contain">
                         <div class="all-faq__faq-question">How do I customize or change memorial page URL or link</div>
@@ -366,11 +348,11 @@
                             Click on the 'Sign Up' link at the top right of the page. You'll be asked to input some basic information about your loved one to get their memorial started. You will also have to fill out some information about yourself because you become the administrator of their memorial.
                         </div>
                     </div>
-                </div>    
+                </div>
             </div>
-        </section>  
-   
- 
+        </section>
+
+
 
 @endsection
 @section('script')
@@ -390,40 +372,6 @@
         //     document.getElementById("loader2").style.display = "none";
         //     document.getElementById("slider-home").style.display = "block";
         // }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    <script>
-        var textWrapper = document.querySelector('.ml11 .letters');
-        textWrapper.innerHTML = textWrapper.textContent.replace(/([^\x00-\x80]|\w)/g, "<span class='letter'>$&</span>");
-
-        anime.timeline({loop: true})
-            .add({
-                targets: '.ml11 .line',
-                scaleY: [0,1],
-                opacity: [0.5,1],
-                easing: "easeOutExpo",
-                duration: 700
-            })
-            .add({
-                targets: '.ml11 .line',
-                translateX: [0, document.querySelector('.ml11 .letters').getBoundingClientRect().width + 10],
-                easing: "easeOutExpo",
-                duration: 700,
-                delay: 100
-            }).add({
-            targets: '.ml11 .letter',
-            opacity: [0,1],
-            easing: "easeOutExpo",
-            duration: 600,
-            offset: '-=775',
-            delay: (el, i) => 34 * (i+1)
-        }).add({
-            targets: '.ml11',
-            opacity: 0,
-            duration: 1000,
-            easing: "easeOutExpo",
-            delay: 1000
-        });
     </script>
 
 

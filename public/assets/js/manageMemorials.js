@@ -98,7 +98,7 @@ function loadFromLocalStorage() {
 
   if(images && images.length > 0){
     imagesObject = images;
-    
+
     displayNumberOfImgs();
     images.forEach(displayImgData);
   }
@@ -120,13 +120,13 @@ function displayNumberOfImgs() {
   if(imagesObject.length > 0){
 
     // document.getElementById("state").innerHTML = imagesObject.length + " image" + ((imagesObject.length > 1) ? "s" : "") + " added";
-    
+
     document.getElementById("deleteImgs").style.display = "flex";
-    
+
   } else {
     document.getElementById("state").innerHTML = `<img src="/assets/img/add-image-icon.svg"> Add Image `;
     document.getElementById("deleteImgs").style.display = "none";
-  } 
+  }
 }
 
 function deleteImages(e) {
@@ -147,6 +147,7 @@ stateBtn.addEventListener("click", function (e) {
   e.preventDefault();
   filesBtn.click();
 });
+
 filesBtn.addEventListener('change', handleFileSelect, false);
 document.getElementById('deleteImgs').addEventListener("click", deleteImages);
 loadFromLocalStorage();

@@ -16,21 +16,10 @@
     <meta name="description" content="Stories">
 @endsection
 @section('css')
- 
-  …
-  <link rel="stylesheet" type="text/css" href="trix.css">
-  <script type="text/javascript" src="trix.js"></script>
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <!-- Main Quill library -->
-    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
-    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
-    <!-- Theme included stylesheets -->
-    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
-    <script type="module" src="{{asset('assets/js/memorialView.js')}}" defer></script>
+{{--    <!-- Main Quill library -->--}}
 @endsection
 @section('content')
-@endsection
  <main>
             <section class="dashboard profile-container profile-container--pages">
                 <form action="#" class="memorial-form">
@@ -64,7 +53,7 @@
                                     <div id="editor-about">
                                         <form method="POST" action="">
                                             <textarea name="" id="" cols="30" rows="10"></textarea>
-                                            
+
                             <input type="submit" class="memorial-form__button memorial-form__button--publish" value="Submit">
                                         </form>
                                     </div>
@@ -93,13 +82,13 @@
                                     <div class="upload-image__button">
                                         <div class="upload-button">
                                             <div class="#">
-                                                <form method="POST" action="{{route('image.save', $memorial->slug)}}">
-                                                <input type="file" id="files" accept="image/png, image/jpg, image/jpeg">
+{{--                                                <form method="POST" action="{{route('image.save', $memorial->slug)}}">--}}
+                                                <input type="file" hidden="hidden" id="files" accept="image/png">
                                                 <button type="button" id="state">
                                                     <img src="/assets/img/add-image-icon.svg" class="btnImg">
                                                     <span>Add Image</span>
                                                 </button>
-                                            </form>
+{{--                                            </form>--}}
                                                 <!-- <p id="state">Add an image</p> -->
                                                 <div id="list"></div>
                                                 <a href="#" id="deleteImgs">
@@ -141,7 +130,7 @@
 
                                 <div class="upgrade">
                                     <p class="upgrade__text">
-                                        You are currently subscribe to a free plan. Upgrade your subscription to add more stories 
+                                        You are currently subscribe to a free plan. Upgrade your subscription to add more stories
                                     </p>
                                     <a href="#" class="upgrade__link">Upgrade Subscription</a>
                                 </div>
@@ -154,12 +143,12 @@
                                         <img src="/assets/img/preview-icon.svg" class="preview-card__preview-icon">
                                         <span>Preview memorial</span>
                                     </a>
-                                    <a href="#" class="preview-card__view-tributes">View Tributes</a> 
+                                    <a href="#" class="preview-card__view-tributes">View Tributes</a>
                                 </div>
                                 <div class="preview-card__center">
                                     <div class="preview-card__contain">
                                         <p class="preview-card__text">Lifespan</p>
-                                        <a href="#" class="preview-card__edit-details">Edit Details</a> 
+                                        <a href="#" class="preview-card__edit-details">Edit Details</a>
                                     </div>
                                     <p class="preview-card__date-created">Date created: {{$memorial->created_at->toDateString()}}</p>
                                     <p class="preview-card__expiring">Expiring: {{$memorial->expiry_date->todateString()}}</p>
@@ -272,7 +261,8 @@
                 </form>
             </section>
         </main>
-        
+@endsection
+
 @section('script')
-                
+    <script type="module" src="{{asset('assets/js/manageMemorials.js')}}"></script>
 @endsection

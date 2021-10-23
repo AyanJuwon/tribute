@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Socialite;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
+use Laravel\Socialite\Facades\Socialite;
 
-use App\Models\User;
-use App\Models\SocialAccount;
+use App\User;
+use App\SocialAccount;
 class SocialController extends Controller
 {
- public function redirectToProvider(String $provider){
-        return \Socialite::driver($provider)->redirect();
+
+    public function redirectToProvider(String $provider){
+        return Socialite::driver($provider)->redirect();
     }
 
     public function providerCallback(String $provider){
         try{
-            $social_user = \Socialite::driver($provider)->user();
+            $social_user = Socialite::driver($provider)->user();
 
             // First Find Social Account
             $account = SocialAccount::where([
@@ -38,18 +41,17 @@ class SocialController extends Controller
             // If User not get then create new user
             if(!$user){
                 $user = User::create([
-                    'email'=>$social_user->getEmail(),
-                    'name'=>$social_user->getName(),
-                    'password'=>Hash::make('password'),
+                    'email'=> $social_user->getEmail(),
+                    'name'=> $social_user->getName(),
+                    'password'=> Hash::make('password'),
                     'role' => 'user',
-            'ip_address' => null,
-            'location' => null,
-            'country' => null,
-            
-                'provider_id'=>$social_user->getId(),
-                'provider_name'=>$provider,
+                    'ip_address' => null,
+                    'location' => null,
+                    'country' => null,
+                    'provider_id'=> $social_user->getId(),
+                    'provider_name'=>$provider,
                 ]);
-                dd($user);
+//                dd($user);
             }
 
             // Create Social Accounts
@@ -66,19 +68,18 @@ class SocialController extends Controller
             // return redirect()->route('landing');
 
         }catch(\Exception $e){
-
-            dd($e->getMessage());
+            Log::info($e->getMessage());
             return redirect()->route('login');
         }
-    }   
-    
+    }
+
     public function completeProfilePage($user){
-        
+
         $user = User::where('id', auth()->user()->id)->firstOrFail();
         return view('auth.complete-profile');
     }
 
-    
+
        public function completeProfile(Request $request,$id){
         $user = User::where('id', $id)->where('role','user')->firstOrFail();
         $user->update([

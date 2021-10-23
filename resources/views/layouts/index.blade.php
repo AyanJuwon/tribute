@@ -242,7 +242,7 @@
                 <a href="{{ route('terms') }}" style="color: white">Terms & Conditions</a>
                 <br>
                 <div class="padding-bottom-20"></div>
-                <a href="{{ route('pandp') }}" style="color: white">Privacy Policy</a>
+{{--                <a href="{{ route('pandp') }}" style="color: white">Privacy Policy</a>--}}
                 <br>
                 <div class="padding-bottom-20"></div>
                 <a href="https://codefixbug.com" target="_blank" style="color: white">About Parent Company</a>

@@ -26,10 +26,10 @@
                         <span>Create Memorial</span>
                     </a>
                 </div>
-    
+
                 <div class="memorials-content">
                     <div class="memorials-content__left">
-                         @if($count == 0)--}}
+                         @if($count == 0)
                        <div class="text-center">
                            <div class="padding-bottom-60"></div>
                            <h3>Nothing to show yet, <a href="{{ route('createMemorial') }}" style="color:#c0a16b;"> create a memorial</a></h3>
@@ -83,7 +83,7 @@
                                             <a href="#" class="tribute-details__link"><img src="{{asset('assets/img/whatsapp-memorial.svg')}}" alt="twitter" class="tribute-details__icon"></a>
                                             <a href="#" class="tribute-details__link"><img src="{{asset('assets/img/facebook-memorial.svg')}}" alt="facebook" class="tribute-details__icon"></a>
                                         </div>
-    
+
                                         <div class="tribute-details__copy">
                                             <a href="{{route('viewMemorial',$detail->slug)}}" id="copy-content">{{$detail->slug}}/createtribute.com</a>
                                             <button id="btn-copy">
@@ -96,12 +96,13 @@
                         </div>
 @endforeach
 @endif
-                       
+
                     </div>
+                    @if(\App\Memorial::countMostViewedMemorial() > 0)
                     <aside class="memorials-content__right">
-                        
+
                             {{-- @foreach ($mostViewed as $mostViewed ) --}}
-                        
+
                         <h4 class="aside-heading">Most Viewed Tribute</h4>
                         <div class="top-tribute">
                             <div class="top-tribute__card-img">
@@ -140,8 +141,11 @@
                             </div>
                         </div>
                     </aside>
+                    @else
+                    <h1>I'm just chilling</h1>
+                        @endif
                 </div>
             </div>
         </div>
 
-@endsection  
+@endsection

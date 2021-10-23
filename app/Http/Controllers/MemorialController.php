@@ -23,7 +23,7 @@ use Stevebauman\Location\Facades\Location;
 class MemorialController extends Controller
 {
     public function store(Request $request){
-       
+
         $request->validate([
             'name' => 'required',
             'relationship' => 'required',
@@ -33,13 +33,19 @@ class MemorialController extends Controller
             'death_date' => 'required',
             'picture' => 'required|mimes:jpg,jpeg,gif,png,bmp,svg,svgz,cgm,djv,djvu,ico,ief,jpe,pbm,pgm,pnm,ppm,ras,rgb,tif,tiff,wbmp,xbm,xpm,xwd|max:3072',
         ]);
-            $stringName = $request->name;
-            $names = explode(" ", $stringName);
-            $first_name = $names[0];
-            $last_name = $names[1];
 
-        $fr = strtolower($first_name);
-        $ln = strtolower($last_name);
+            $names = explode(" ", $request->name);
+            if(is_array($names) && count($names) <= 1){
+                return redirect()->back()->with('message','You need to input first name and last name or else the computer will assume that you do not have sense');
+            }else {
+                $first_name = $names[0];
+                $last_name = $names[1];
+                $fr = strtolower($first_name);
+                $ln = strtolower($last_name);
+            }
+
+
+
         $slug = $fr. '-' . $ln;
 
         // $born_date = $request->born_year . '-' .  $request->born_month . '-' . $request->born_day;
@@ -54,16 +60,6 @@ class MemorialController extends Controller
             $filename = time() . '.' . $extension;
             $file->move('uploads/memorial', $filename);
             $image = $filename;
-        }
-
-        if($request->hasFile('music')){
-            $file = $request->file('music');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/music', $filename);
-            $music = $filename;
-        }else {
-            $music = 'NULL';
         }
 
         $now = Carbon::now();
@@ -86,7 +82,6 @@ class MemorialController extends Controller
             'born_date' => Carbon::parse($request->born_date),
             'passed_away_date' => Carbon::parse($request->death_date),
             'picture' => $image,
-            'music' => $music,
             'plan_type' => $request->plan_type,
 //            'plan_type' => 'NULL',
             'expiry_date' => $expiry_date
@@ -96,8 +91,8 @@ class MemorialController extends Controller
 //        dd($memorial);
 //        $position = Location::get(\request()->ip());
 //        $location = $position->cityName . '/' . $position->countryName;
-if($request->plan_type != 'free'){
-    Payment::create([
+    if($request->plan_type != 'free'){
+        Payment::create([
         'ip_address' => \request()->ip(),
         // create a location column and get it so users can know what currency to pay
         'location' => 'Abuja/Nigeria',
@@ -108,13 +103,13 @@ if($request->plan_type != 'free'){
         'reference' => $request->reference,
     ]);
 }
-dd($request->all);
+//        dd($request->all());
 
         Mail::send(new MemorialMail($memorial));
 
         session()->flash('message', 'Memorial Created Successfully');
 //        return redirect()->back();
-        return redirect($slug . 'manage-memorial/');
+        return redirect('manage-memorial/'.$memorial->slug);
     }
 
     public  function  createMemorial(){
@@ -125,7 +120,7 @@ public function getInitials($stringName){
      $names = explode(" ", $stringName);
             $first_name = $names[0];
             $last_name = $names[1];
-            
+
         $fr = strtoupper($first_name);
         $ln = strtoupper($last_name);
         $initials = $fr[0].$ln[0];
@@ -147,7 +142,7 @@ public function getInitials($stringName){
 
     public function memorials(){
         $details = Memorial::where('created_by', auth()->user()->id)->get();
-        $count = Memorial::where('created_by', auth()->user()->id)->count();
+        $count = Memorial::countUserMemorials();
         $mostViewed = Memorial::where('active',true)->where('page_views',Memorial::max('page_views'))->first();
         // dd($mostViewed);
 //        $payment = Payment::getPayment();
@@ -165,9 +160,9 @@ public function getInitials($stringName){
         $tributes = Tribute::where('slug',$slug)->get();
         $lives = Life::where('slug',$slug)->first();
         $images = AddImages::where('slug',$slug)->get();
-        
+
         $detail = Memorial::where('slug', $slug)->firstOrFail();
-        
+
          $detail->page_views ++;
         $detail->save();
         // $detail->update()
@@ -327,7 +322,7 @@ public function getInitials($stringName){
             $image = 'NULL';
         }
 
-      
+
         $data['born_date'] = $born_date;
         $data['passed_away_date'] = $death_date;
 
@@ -395,8 +390,8 @@ public function getInitials($stringName){
             'expiry_date' => $expiry_date
         ]);
 
-        $position = Location::get(\request()->ip());
-        $location = $position->cityName . '/' . $position->countryName;
+//        $position = Location::get(\request()->ip());
+//        $location = $position->cityName . '/' . $position->countryName;
 
         Payment::create([
             'ip_address' => \request()->ip(),

@@ -16,18 +16,17 @@
     <meta name="description" content="Create Memorial">
 @endsection
 @section('css')
-   
+
     <script type="module" src="{{asset('assets/js/createMemorial.js')}}" defer></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
   <script>
-    //   DATE OF DEATH
   $( function() {
     $( "#datepicker" ).datepicker({
         changeMonth: true,
       changeYear: true});
-      
+
     $( "#anim" ).on( "change", function() {
       $( "#datepicker" ).datepicker( "option", "showAnim", $( this ).val() );
     });
@@ -37,7 +36,8 @@
       $( "#datepicker" ).datepicker( "option", "dateFormat", $( this ).val() );
     });
   } );
-//   DATE OF DEATH
+
+
   $( function() {
     $( "#datepicker2" ).datepicker({changeMonth: true,
       changeYear: true});
@@ -77,8 +77,14 @@
                         </div>
                     </div>
                 </div>
+{{--                @include('partials.list_error')--}}
+                @include('partials.error')
+{{--                @include('partials.success')--}}
                 <form action="{{route('store.memorial')}}" method="POST" class="memorial-form" enctype="multipart/form-data" id="regForm">
                     @csrf
+                    <input type="hidden" name="plan_type" id="plan_type">
+                    <input type="hidden" name="amount" id="amount" >
+                    <input type="hidden" name="reference" id="reference" >
                     <p class="memorial-form__text">
                         Create beautiful memories of your loved ones share stories, photos and write tributes to preserve their legacies.
                     </p>
@@ -146,6 +152,7 @@
                             </div>
                         </div>
                     </div>
+
                 </form>
                 <div class="next-page">
                     <input type="submit" class="next-btn" value="Next Step">
@@ -251,9 +258,9 @@
                                 </li>
                             </ul>
 
-                            <a  onclick="payWithPaystack('yearly', '2500', '{{ \Illuminate\Support\Str::random(32) }}')" class="card-button-white-create">Choose plan</a>
+                            <a onclick="payWithPaystack('yearly', '2500', '{{ \Illuminate\Support\Str::random(32) }}')" class="card-button-white-create">Choose plan</a>
                         </div>
-                        
+
 
 {{-- ENd Yearly --}}
 
@@ -312,12 +319,13 @@
             domain.defaultValue = `${first1}-${last1}`
         }
     </script>
-<script src="https://js.paystack.co/v1/inline.js"></script> 
+<script src="https://js.paystack.co/v1/inline.js"></script>
 <script>
     function payWithPaystack(plan_type,amount, ref) {
         var amt = amount * 100;
         var plan_type = plan_type;
         var amt_save = amt / 100;
+        console.log(plan_type)
 
         if (plan_type === 'free') {
             $('#reference').val(ref);

@@ -20,7 +20,7 @@
 
     <!-- Title -->
     <title>@yield('title')</title>
-@yield('css')
+
 
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
     <!-- Main Quill library -->
@@ -35,10 +35,11 @@
 <!---Switcher css-->
     <link href="{{asset('assets/switcher/css/switcher.css')}}" rel="stylesheet">
     <link href="{{asset('assets/switcher/demo.css')}}" rel="stylesheet">
+    @yield('css')
 </head>
 
 <body>
-    
+
     <div class="sidenav">
         <div class="nav" id="navbar">
             <nav class="nav__container">
@@ -75,7 +76,7 @@
                                             <span class="nav__memorials">{{\App\Memorial::where('created_by',auth()->user()->id)->count()}}</span>
                                         </a>
                                         <div class="nav__dropdown-collapse">
-                                            
+
                                             <div class="nav__dropdown-content">
                                             @if (\App\Memorial::where('created_by',auth()->user()->id)->count() == 0)
                                                  <div class="dash-memorials__empty-content">
@@ -87,26 +88,26 @@
                                 <img src="/assets/img/add-icon.svg">
                                 <span>Create Memorial</span>
                             </a>
-                        </div> 
+                        </div>
                                             @else
                                                 @foreach (\App\Memorial::where('created_by',auth()->user()->id)->get() as $memorial )
-                                               
-                                            
+
+
                                                 <a href="{{route('manageMemorial', $memorial->slug)}}" class="nav__dropdown-item">
                                                     <img src="/assets/img/memorial-img-1.png" alt="Memorial Person" class="nav__dropdown-avatar">
                                                     <p class="nav__dropdown-fullname">{{$memorial->first_name.' '.$memorial->last_name}}</p>
-                                                </a>     
+                                                </a>
                                                 @endforeach
                                                @endif
                                             </div>
                                         </div>
                                     </div>
-    
+
                             <a href="{{route('myTributes')}}" class="nav__link">
                                         <img src="{{asset('assets/img/manage-tributes-icon.svg')}}" }}class="nav__link-icon">
                                         <span class="nav__name">Manage Tributes</span>
                                     </a>
-    
+
                                     <a href="{{route('myStories')}}" class="nav__link">
                                         <img src="{{asset('assets/img/manage-stories-icon.svg')}}" class="nav__link-icon">
                                         <span class="nav__name">Manage Stories</span>
@@ -125,15 +126,16 @@
                             </div>
                         </div>
                         </div>
-                         <div class="nav__nav-bottom"> 
-                                <img src="/assets/img/logout-icon.svg" class="nav__link-icon">
-                      
-                            {{-- <a href="{{route('logout')}}" class="nav__link"> --}}
-                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    
-                               <input type="submit" class="nav_link" value="Logout"></form>
-                            
+                         <div class="nav__nav-bottom">
+                             <a href="{{route('logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav__link">
+                                 <img src="/assets/img/logout-icon.svg" class="nav__link-icon">
+                                 <span class="nav__name">Logout</span>
+                             </a>
+
+                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                 @csrf
+                             </form>
+
                         </div>
                     </div>
                 </div>
@@ -143,7 +145,7 @@
 
     </div>
         @yield('content')
-    
+
 @yield('script')
 
 

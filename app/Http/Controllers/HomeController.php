@@ -184,20 +184,20 @@ class HomeController extends Controller
     public function userCreatedStories(){
         session()->put('backUrl');
         $stories = Stories::where('user_id',auth()->user()->id)->get();
-       
+
         return view('tribute.stories')
             ->with('stories', $stories);
     }
-    
+
     public function userCreatedTributes(){
         session()->put('backUrl');
         $tributes = Tribute::where('user_id',auth()->user()->id)->get();
-       
+
         return view('tribute.tributes')
             ->with('tributes', $tributes);
     }
 
-    
+
     public function manageMemorial($slug){
         session()->put('backUrl');
         $memorial = Memorial::where('slug',$slug)->first();
@@ -210,7 +210,7 @@ class HomeController extends Controller
             ->with('activities', $activities);
     }
 
-    
+
     public function programme(){
         return view('tribute.program');
     }
@@ -273,8 +273,8 @@ class HomeController extends Controller
         }else {
             $memorialz = '';
         }
-//        $mem = new Memorial();
-        $memorials = Memorial::orderBy('created_at', 'desc')->where('active', true)->take(3)->get();
+
+        $memorials = Memorial::orderBy('created_at', 'desc')->where('active', true)->take(4)->get();
         return view('tribute.landing')
             ->with('memorials', $memorials)
             ->with('memorial', $memorial)
@@ -334,6 +334,8 @@ class HomeController extends Controller
         $mem = Memorial::orderBy('created_at', 'desc')->where('active', true)->take(3)->get();
         return view('tribute.faq')->with('memorials', $mem);
     }
+
+
 
 
 }
