@@ -17,7 +17,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/js/script.js')}}">
     <script src="{{asset('assets/js/index.js')}}" defer></script>
     @yield('css')
     <title>@yield('title')</title>

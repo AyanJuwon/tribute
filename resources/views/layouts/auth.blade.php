@@ -47,11 +47,11 @@
                     </div>
     
                     <div class="buttons">
-                        <a href="{{route('socialLogin' , 'google')}}" class="continue-button">
+                        <a href="{{url('social-auth/google')}}" class="continue-button">
                             <img src="/assets/img/google.svg" alt="Google" class="continue-button__img">
                             Continue with Google
                         </a>
-                        <a href="{{route('socialLogin' , 'facebook')}}" class="continue-button">
+                        <a href="{{url('social-auth/facebook')}}" class="continue-button">
                             <img src="/assets/img/facebook-form.svg" alt="Google" class="continue-button__img">
                             Continue with Facebook
                         </a>

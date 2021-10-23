@@ -23,7 +23,7 @@ use Stevebauman\Location\Facades\Location;
 class MemorialController extends Controller
 {
     public function store(Request $request){
-    //    dd($request->all());
+       
         $request->validate([
             'name' => 'required',
             'relationship' => 'required',
@@ -32,7 +32,6 @@ class MemorialController extends Controller
             'born_date' => 'required',
             'death_date' => 'required',
             'picture' => 'required|mimes:jpg,jpeg,gif,png,bmp,svg,svgz,cgm,djv,djvu,ico,ief,jpe,pbm,pgm,pnm,ppm,ras,rgb,tif,tiff,wbmp,xbm,xpm,xwd|max:3072',
-            'music' => 'mimes:mp3|max:3072'
         ]);
             $stringName = $request->name;
             $names = explode(" ", $stringName);
@@ -109,12 +108,13 @@ if($request->plan_type != 'free'){
         'reference' => $request->reference,
     ]);
 }
+dd($request->all);
 
         Mail::send(new MemorialMail($memorial));
 
         session()->flash('message', 'Memorial Created Successfully');
 //        return redirect()->back();
-        return redirect($slug . '/about');
+        return redirect($slug . 'manage-memorial/');
     }
 
     public  function  createMemorial(){
@@ -163,7 +163,7 @@ public function getInitials($stringName){
     public function viewMemorial($slug){
         $stories = Stories::where('slug',$slug)->get();
         $tributes = Tribute::where('slug',$slug)->get();
-        $lives = Life::where('slug',$slug)->get();
+        $lives = Life::where('slug',$slug)->first();
         $images = AddImages::where('slug',$slug)->get();
         
         $detail = Memorial::where('slug', $slug)->firstOrFail();
@@ -175,6 +175,7 @@ public function getInitials($stringName){
             'detail'=>$detail,
             'tributes'=>$tributes,
             'lives'=> $lives,
+            'stories'=> $stories,
             'images'=>$images,]);
     }
 
@@ -196,6 +197,15 @@ public function getInitials($stringName){
         $user->update($data);
 
         session()->flash('message', 'Details Updated successfully');
+
+        return redirect()->back();
+    }
+
+    public function addAbout(Request $request,$slug){
+        $memorial = Memorial::where('slug',$slug)->get();
+        $about = $request->about;
+        $memorial->update('main_section_text',$about);
+         session()->flash('message', 'Details Updated successfully');
 
         return redirect()->back();
     }
@@ -317,18 +327,7 @@ public function getInitials($stringName){
             $image = 'NULL';
         }
 
-        if($request->hasFile('music')){
-            $file = $request->file('music');
-            $extension = $file->getClientOriginalExtension();
-            $filename = time() . '.' . $extension;
-            $file->move('uploads/music', $filename);
-            $music = $filename;
-
-            $data['music'] = $music;
-        }else {
-            $music = 'NULL';
-        }
-
+      
         $data['born_date'] = $born_date;
         $data['passed_away_date'] = $death_date;
 
@@ -346,15 +345,14 @@ public function getInitials($stringName){
         $memorial = Memorial::where('slug', $slug)->where('active', true)->firstOrFail();
 
         $data = $request->validate([
-            'personal_phrase' => 'required|max:999',
             'main_section_text' =>  'required|max:4999'
         ]);
 
         $memorial->update($data);
 
-        session()->flash('message', 'Website Updated successfully');
+        return  session()->flash('message', 'Details Updated successfully');
 
-        return redirect($memorial->slug . '/about');
+        return redirect()->back();;
 
     }
 

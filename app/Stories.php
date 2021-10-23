@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Memorial;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Activitylog\Traits\LogsActivity;
 
@@ -9,7 +11,7 @@ class Stories extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['story', 'image', 'user_id', 'slug','active'];
+    protected $fillable = ['story', 'image', 'user_id', 'slug','active','isPublic'];
 
     protected static $logAttributes = ['story', 'from'];
 
@@ -18,8 +20,9 @@ class Stories extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
-    public function story(){
-        return $this->belongsTo(User::class);
+    
+    public function memorial(){
+        return $this->belongsTo(Memorial::class,'slug');
     }
 
     public static function checkClose(){
@@ -45,6 +48,11 @@ class Stories extends Model
 
     public static function getStoriesbySlug($slug){
         return Stories::where('active', true)->where('slug', $slug)->count();
+    }
+    public static function getMemorialDetailsbySlug($slug){
+        $name =  Memorial::where('active', true)->where('slug', $slug)->first();
+        // $name = $name->first_name;
+        return $name;
     }
 
     public static function countStories($slug){

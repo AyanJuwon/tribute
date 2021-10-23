@@ -22,7 +22,15 @@
     <title>@yield('title')</title>
 @yield('css')
 
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <!-- Main Quill library -->
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <!-- Theme included stylesheets -->
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+    <script type="module" src="{{asset('assets/js/manageTributes.js')}}" defer></script>
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
 <!---Switcher css-->
     <link href="{{asset('assets/switcher/css/switcher.css')}}" rel="stylesheet">
@@ -84,7 +92,7 @@
                                                 @foreach (\App\Memorial::where('created_by',auth()->user()->id)->get() as $memorial )
                                                
                                             
-                                                <a href="#" class="nav__dropdown-item">
+                                                <a href="{{route('manageMemorial', $memorial->slug)}}" class="nav__dropdown-item">
                                                     <img src="/assets/img/memorial-img-1.png" alt="Memorial Person" class="nav__dropdown-avatar">
                                                     <p class="nav__dropdown-fullname">{{$memorial->first_name.' '.$memorial->last_name}}</p>
                                                 </a>     
@@ -94,12 +102,12 @@
                                         </div>
                                     </div>
     
-                                    <a href="#" class="nav__link">
+                            <a href="{{route('myTributes')}}" class="nav__link">
                                         <img src="{{asset('assets/img/manage-tributes-icon.svg')}}" }}class="nav__link-icon">
                                         <span class="nav__name">Manage Tributes</span>
                                     </a>
     
-                                    <a href="" class="nav__link">
+                                    <a href="{{route('myStories')}}" class="nav__link">
                                         <img src="{{asset('assets/img/manage-stories-icon.svg')}}" class="nav__link-icon">
                                         <span class="nav__name">Manage Stories</span>
                                     </a>
@@ -109,7 +117,7 @@
                                     </a>
                                 </div>
                                 <div class="nav__links-bottom">
-                                    <a href="{{route('createMemorial'   )}}" class="nav-button">
+                                    <a href="{{route('createMemorial')}}" class="nav-button">
                                         <img src="{{asset('assets/img/plus-icon.svg')}}" alt="">
                                         <span>Create Memorial</span>
                                     </a>
@@ -117,11 +125,15 @@
                             </div>
                         </div>
                         </div>
-                        <div class="nav__nav-bottom">
-                            <a href="{{route('logout')}}" class="nav__link">
+                         <div class="nav__nav-bottom"> 
                                 <img src="/assets/img/logout-icon.svg" class="nav__link-icon">
-                                <span class="nav__name">Logout</span>
-                            </a>
+                      
+                            {{-- <a href="{{route('logout')}}" class="nav__link"> --}}
+                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    
+                               <input type="submit" class="nav_link" value="Logout"></form>
+                            
                         </div>
                     </div>
                 </div>

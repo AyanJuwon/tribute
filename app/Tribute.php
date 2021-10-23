@@ -9,7 +9,7 @@ class Tribute extends Model
 {
     use LogsActivity;
 
-    protected $fillable = ['tribute', 'user_id', 'docs', 'slug', 'active'];
+    protected $fillable = ['tribute', 'user_id', 'docs', 'slug', 'active','isPublic'];
 
     protected static $logAttributes = ['tribute'];
 
@@ -17,6 +17,9 @@ class Tribute extends Model
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+    public function memorial(){
+        return $this->belongsTo(Memorial::class);
     }
 
     public function getDescriptionForEvent(string $eventName): string
@@ -39,6 +42,12 @@ class Tribute extends Model
     //     $slug = Memorial::where('id',$id)->get();
     //     return Tribute::where('active', true)->where('slug',$slug)->count();
     // }
+
+      public static function getMemorialDetailsbySlug($slug){
+        $name =  Memorial::where('active', true)->where('slug', $slug)->first();
+        // $name = $name->first_name;
+        return $name;
+    }
 
     public static function bannedTributes(){
         return Tribute::where('active', false)->count();

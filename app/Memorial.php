@@ -24,8 +24,13 @@ class Memorial extends Model
         return $this->belongsTo(User::class, 'created_by');
     }
 
-    public function life(){
-        return $this->belongsTo(memorial::class, 'slug');
+    
+    public function stories(){
+        return $this->hasMany(Memorial::class, 'slug');
+    }
+
+    public function tribute(){
+        return $this->hasMany(Memorial::class, 'slug');
     }
 
     

@@ -312,7 +312,7 @@
             domain.defaultValue = `${first1}-${last1}`
         }
     </script>
-
+<script src="https://js.paystack.co/v1/inline.js"></script> 
 <script>
     function payWithPaystack(plan_type,amount, ref) {
         var amt = amount * 100;
@@ -353,37 +353,7 @@
         }
     }
 
-    </script>
-<script>
-var min = 1900,
-max = new Date().getFullYear(),
-select = document.querySelector('.selectElementId');
-
-for (var i = min; i <= max; i++) {
-var opt = document.createElement('option');
-opt.value = i;
-opt.innerHTML = i;
-select.appendChild(opt);
-}
-
-select.value = new Date().getFullYear();
-</script>
-
-<script>
-    var min = 1900,
-        max = new Date().getFullYear(),
-        select = document.querySelector('.selectElementId2');
-
-    for (var i = min; i <= max; i++) {
-        var opt = document.createElement('option');
-        opt.value = i;
-        opt.innerHTML = i;
-        select.appendChild(opt);
-    }
-
-    select.value = new Date().getFullYear();
-</script>
-
+//     </script>
 
 @endsection
 

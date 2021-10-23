@@ -48,6 +48,8 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+// bWhKbQ7o~@QM
+// 79bMr@#8ZC?R
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

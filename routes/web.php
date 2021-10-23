@@ -167,6 +167,15 @@ Route::middleware(['auth'])->group(function (){
 
     Route::get('paymentdetails', 'MemorialController@paymentdetails')->name('payment');
 
+    Route::get('myStories', 'HomeController@userCreatedStories')->name('myStories');
+    
+    Route::get('myTribute', 'HomeController@userCreatedTributes')->name('myTributes');
+
+    Route::get('manage-memorial/{slug}', 'HomeController@manageMemorial')->name('manageMemorial');
+
+
+
+
 //    Route::delete('image/{image}', 'ImageController@destroy')->name('deleteImage');
 
 });
@@ -182,7 +191,7 @@ Route::middleware(['auth','check-mem-id'])->group(function(){
 });
 
 
-Route::middleware(['check-route', 'check-date'])->group(function(){
+Route::middleware(['auth','check-route'])->group(function(){
 
     Route::get('/{slug}', function ($slug){
       return redirect(\route('welcome', $slug))->with('message');
@@ -202,7 +211,7 @@ Route::middleware(['check-route', 'check-date'])->group(function(){
 
     Route::post('/{slug}/updategeneralinformation', 'MemorialController@generalInfo')->name('generalInfo');
 
-    Route::post('/{slug}/updatepersonalphraseandmainsectiontext', 'MemorialController@personalPhrase')->name('personalPhrase');
+    Route::post('/{slug}/add-about', 'MemorialController@personalPhrase')->name('personalPhrase');
 
     Route::get('/{slug}/deleteuserimage/{id}', 'ImageController@testimage')->name('testimage');
 

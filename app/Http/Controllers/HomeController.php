@@ -181,7 +181,36 @@ class HomeController extends Controller
             ->with('activities', $act)
             ->with('detail', $details);
     }
+    public function userCreatedStories(){
+        session()->put('backUrl');
+        $stories = Stories::where('user_id',auth()->user()->id)->get();
+       
+        return view('tribute.stories')
+            ->with('stories', $stories);
+    }
+    
+    public function userCreatedTributes(){
+        session()->put('backUrl');
+        $tributes = Tribute::where('user_id',auth()->user()->id)->get();
+       
+        return view('tribute.tributes')
+            ->with('tributes', $tributes);
+    }
 
+    
+    public function manageMemorial($slug){
+        session()->put('backUrl');
+        $memorial = Memorial::where('slug',$slug)->first();
+        // $memorial = Memoriel::where('user_id',auth()->user()->id)->first();
+        // $memorial = Memoriel::where('user_id',auth()->user()->id)->first();
+        $activities = ActiviesLog::orderBy('created_at', 'desc')->where('slug', $slug)->take(5)->where('active', true)->get();
+
+        return view('tribute.manage-memorial')
+            ->with('memorial', $memorial)
+            ->with('activities', $activities);
+    }
+
+    
     public function programme(){
         return view('tribute.program');
     }

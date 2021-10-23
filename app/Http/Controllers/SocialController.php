@@ -40,11 +40,16 @@ class SocialController extends Controller
                 $user = User::create([
                     'email'=>$social_user->getEmail(),
                     'name'=>$social_user->getName(),
+                    'password'=>Hash::make('password'),
                     'role' => 'user',
             'ip_address' => null,
             'location' => null,
             'country' => null,
+            
+                'provider_id'=>$social_user->getId(),
+                'provider_name'=>$provider,
                 ]);
+                dd($user);
             }
 
             // Create Social Accounts
@@ -56,11 +61,13 @@ class SocialController extends Controller
             // Login
             auth()->login($user);
             // complete profile here redirect to complete profile page
-            completeProfilePage($user);
-            return redirect()->route('completeRegistration', [$user]);
+            // completeProfilePage($user);
+            return redirect()->route('user.dashboard');
             // return redirect()->route('landing');
 
         }catch(\Exception $e){
+
+            dd($e->getMessage());
             return redirect()->route('login');
         }
     }   
