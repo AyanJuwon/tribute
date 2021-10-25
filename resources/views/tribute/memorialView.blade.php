@@ -415,7 +415,7 @@
                                         <div class="tribute-view-card__body-tribute-view">
                                             <div class="tribute-view-card__body-no-image">
                                                 <div class="tribute-view-card__header">
-                                                    <p class="tribute-view-card__initials">{{App\Memorial::getInitials($tribute->users->name)}}</p>
+                                                    <p class="tribute-view-card__initials">{{App\Memorial::getInitials($tribute->user->name)}}</p>
                                                     <div class="tribute-view-card__info">
                                                         <p class="tribute-view-card__from">From</p>
                                                         <h6 class="tribute-view-card__fullname">{{$tribute->user->name}}</h6>
