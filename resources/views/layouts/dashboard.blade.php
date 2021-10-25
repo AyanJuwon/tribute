@@ -29,7 +29,7 @@
     <!-- Theme included stylesheets -->
     <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
-    <script type="module" src="{{asset('assets/js/manageTributes.js')}}" defer></script>
+    <script type="module" src="{{asset('assets/js/manageMemorials.js')}}" defer></script>
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
 <!---Switcher css-->
@@ -48,14 +48,15 @@
 
                     <div class="nav__list">
                         <div class="nav__nav-top">
+                           
                             <div class="nav__items">
-                            <div class="nav__profile">
+                            <a href="{{route('user.completeProfileForm', auth()->user()->id)}}"> <div class="nav__profile">
                                 <h5 class="nav__user-initials">RA</h5>
                                 <div class="nav__set">
                                 <h5 class="nav__user-name">{{auth()->user()->name}}</h5>
                                 <p class="nav__role">{{auth()->user()->role}}</p>
                                 </div>
-                            </div>
+                            </div></a>
 
                             <div class="nav__links">
                                 <div class="nav__links-top">

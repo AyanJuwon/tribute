@@ -38,13 +38,15 @@ class StoriesController extends Controller
         }else{
             $image = '';
         }
-
-        $story = Stories::create([
+        if($request->story != ''){
+            $story = Stories::create([
             'story' => $request->story,
             'user_id' => auth()->user()->id,
             'image' => $image,
             'slug' => $slug,
-        ]);
+        ]);   
+        }
+     
 
         ActiviesLog::create([
             'description' => 'shared a story',

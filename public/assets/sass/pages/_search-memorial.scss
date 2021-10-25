@@ -1,0 +1,64 @@
+.search-content {
+    margin: 5.5rem 0 10rem 0;
+
+    &__info {
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+    &__results {
+        margin-top: 4rem;
+    }
+}
+
+.search-result {
+    display: flex;
+    gap: 2.7rem;
+
+    &:not(:last-child) {
+        margin-bottom: 6.6rem;
+    }
+
+    &__img {
+        width: 15rem;
+        border-radius: 5px;
+    }
+
+    &__name {
+        font-size: 2.5rem;
+        font-weight: 500;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    &__date {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: .8rem;
+    }
+
+    span {
+        color: #C4C4C4;
+    }
+}
+
+.result-button:link,
+.result-button:visited {
+    text-decoration: none;
+    color: var(--white-color);
+    background: var(--primary-color);
+    font-size: 1.4rem;
+    padding: .8em 1em;
+    border-radius: 5px;
+    display: inline-block;
+    transition: all .2s;
+}
+
+.result-button:hover,
+.result-button:active {
+    filter: brightness(.9);
+}

@@ -59,9 +59,23 @@ class UsersController extends Controller
         return view('admin.show')->with('user', $user);
     }
 
+
+    public function completeProfileForm($id){
+        
+        $user = User::where('id', $id)->where('role','user')->firstOrFail();
+        return view('auth.complete-profile')->with('user',$user);
+        
+    }
+
+    
     public function completeProfile(Request $request,$id){
+
+        
         $user = User::where('id', $id)->where('role','user')->firstOrFail();
         $user->update([
+            'email' => $request->email,
+
+            'name' => $request->first_name.' '.$request->last_name,
             'location' => $request->location,
         ]);
     session()->flash('message','Account creates successfully');

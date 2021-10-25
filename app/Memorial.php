@@ -42,7 +42,7 @@ class Memorial extends Model
     }
 
 
-    public function getInitials($stringName){
+    public static function getInitials($stringName){
      $names = explode(" ", $stringName);
             $first_name = $names[0];
             $last_name = $names[1];

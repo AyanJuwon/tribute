@@ -1,0 +1,182 @@
+//Hero button
+.hero-btn:link,
+.hero-btn:visited {
+    background-color: var(--primary-color);
+    display: inline-block;
+    padding: 1em 2em;
+    color: var(--white-color);
+    font-size: 1.6rem;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+//Legacy button
+.legacy-btn:link,
+.legacy-btn:visited {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 1em 2em;
+    margin-top: 2rem;
+    border-radius: 6px;
+}
+
+//Card button
+.card-button-light:link,
+.card-button-light:visited {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    padding: 1em 4em;
+    display: inline-block;
+    border-radius: 2.4rem;
+    margin-top: 2.4rem;
+}
+
+.card-button-light-create {
+    font-size: 1.3rem;
+    padding: 1em 2em;
+    text-decoration: none;
+    font-weight: 800;
+    color: var(--primary-color);
+    background-color: var(--secondary-color);
+    display: inline-block;
+    border-radius: 2.4rem;
+    margin-top: 2.4rem;
+}
+
+.card-button-white:link,
+.card-button-white:visited {
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    background-color: var(--white-color);
+    padding: 1em 4.2em;
+    display: inline-block;
+    border-radius: 2.4rem;
+    margin-top: 2.4rem;
+    align-self: center;
+}
+
+.card-button-white-create {
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    background-color: var(--white-color);
+    padding: 1em  2.1em;
+    display: inline-block;
+    border-radius: 2.4rem;
+    margin-top: 2.4rem;
+    align-self: center;
+}
+
+//Cta button
+.cta-button:link,
+.cta-button:visited {
+    background-color: var(--white-color);
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding: 1em 2em;
+    display: inline-block;
+    border-radius: 6px;
+    margin-top: 10rem;
+}
+
+//Continue button
+.continue-button:link,
+.continue-button:visited {
+    text-decoration: none;
+    font-size: 2rem;
+    color: var(--text-color);
+    background-color: #EDE7E7;
+    padding: .5em 1.2em;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.memorials-button:link,
+.memorials-button:visited {
+    background-color: var(--secondary-color);
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 0.6em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 22rem;
+    border-radius: 8px;
+    flex: 0;
+    grid-column: 2 / 3;
+
+    img {
+        padding: .8em;
+        background-color: #FFE0C4;
+        border-radius: 50%;
+    }
+}
+
+.nav-button:link,
+.nav-button:visited {
+    background-color: #222936;
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--white-color);
+    border-radius: 8px;
+    padding: 0.6em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+
+    img {
+        padding: .8em;
+        background-color: #FFE0C4;
+        border-radius: 50%;
+    }
+}
+ 
+.load-tributes-button:link,
+.load-tributes-button:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.4rem;
+    font-weight: 400;
+    border: 2px solid var(--primary-color);
+    padding: 1em;
+    display: inline-block;
+    margin-top: 6rem;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: center;
+}
+
+.profile-memorial-button:link,
+.profile-memorial-button:visited {
+    background: var(--primary-color);
+    padding: .35em 2.2em;
+    color: var(--white-color);
+    font-size: 1.4rem;
+    text-decoration: none;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}

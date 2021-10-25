@@ -10,10 +10,13 @@
 
 @extends('layouts.user')
 @section('title')
-    Memorials
+    Tribute - Memorial
 @endsection
 @section('css')
     
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/lightbox.css')}}">
+    <script type="module" src="{{asset('assets/js/memorialUser.js')}}" defer></script>
     <script type="module" src="{{asset('assets/js/memorialView.js')}}" defer></script>
 @endsection
 @section('content')
@@ -45,7 +48,7 @@
                 <div id="about" data-tab-content class="active">
                     <div class="memorial-view-content">
                         <div class="memorial-view-top">
-                            <p class="tribute__initials">GA</p>
+                            <p class="tribute__initials">{{App\Memorial::getInitials($detail->users->name)}}</p>
                             <div class="tribute__poster">
                                 <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                 <div class="tribute__line">
@@ -65,7 +68,7 @@
                                             <i>" {{$detail->personal_phrase}}"</i>
                                         </blockquote>
                                         <p class="memorial-view__text">
-                                            This memorial website was created in memory of our loved one, {{$detail->last_name. ' ' .$detail->first_name}} 80 years old , born on Sept 02, 1980 and passed away on Aug 19, 2021. We will remember him forever.
+                                            {!! $detail->main_section_text !!}
                                         </p>
                                     </div>
                                 </div>
@@ -141,7 +144,7 @@
                 <div id="life" data-tab-content>
                     <div class="memorial-view-content">
                         <div class="memorial-view-top">
-                            <p class="tribute__initials">GA</p>
+                            <p class="tribute__initials">{{App\Memorial::getInitials($detail->users->name)}}</p>
                             <div class="tribute__poster">
                                 <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                 <div class="tribute__line">
@@ -158,7 +161,7 @@
                                     <h5 class="memorial-view-heading">Life of {{$detail->first_name. ' ' .$detail->last_name}}</h5>
                                     <div class="memorial-view__contain">
                                         <p class="memorial-view__text">
-                                            {{$detail->life}} 
+                                            {!! $life->life !!} 
                                         </p>
                                     </div>
                                 </div>
@@ -171,7 +174,7 @@
                 <div id="gallery" data-tab-content>
                     <div class="memorial-view-content">
                         <div class="memorial-view-top">
-                            <p class="tribute__initials">GA</p>
+                            <p class="tribute__initials">{{App\Memorial::getInitials($detail->users->name)}}</p>
                             <div class="tribute__poster">
                                 <h6 class="tribute__name">{{$detail->users->name}}</h6>
                                 <div class="tribute__line">
@@ -189,15 +192,15 @@
                                     <div class="memorial-view__contain">
                                        <div class="gallery-wrapper">
                                            <div class="gallery">
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-1.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-2.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-3.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-4.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-5.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-6.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-7.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-8.jpg" alt="Gallery Image" class="gallery__img"></span></div>
-                                               <div class="gallery__item"><span><img src="../../assets/img/img-9.jpg" alt="Gallery Image" class="gallery__img"></span></div>
+                                               @foreach($images as $image)
+
+                                                <div class="gallery__item">
+                                                    <a href="{{$image->image}}}" data-lightbox="tribute-imgs">
+                                                        <img src="{{$image->image}}" alt="Tribute Image">
+                                                    </a>
+                                               </div>
+                                               @endforeach
+                                               
                                            </div>
                                            <!-- <div class="preview-box">
                                                <div class="preview-box__details">
@@ -274,7 +277,7 @@
             <div id="story" data-tab-content>
                 <div class="memorial-view-content">
                     <div class="memorial-view-top">
-                        <p class="tribute__initials">GA</p>
+                        <p class="tribute__initials">{{$detail->getInitials($detail->users->name)}}</p>
                         <div class="tribute__poster post-link">
                             <h6 class="tribute__name">{{$detail->users->name}}</h6>
                             <div class="tribute__line">
@@ -306,13 +309,13 @@
                                         <div class="story-card__body-story">
                                             @if ($story->image)
                                               <div class="story-card__body-left">
-                                                <img src="../../assets/img/story-image.png" alt="Story Image" class="story-card__story-img">
+                                                <img src="{{asset('uploads/story/'.$story->image)}}" alt="Story Image" class="story-card__story-img">
                                             </div>   
                                             @endif
                                            
                                             <div class="story-card__body-right">
                                                 <div class="story-card__header">
-                                                    <p class="story-card__initials">NJ</p>
+                                                    <p class="story-card__initials">{{App\Memorial::getInitials($story->user->name)}}</p>
                                                     <div class="story-card__info">
                                                         <p class="story-card__from">From: 
                                                         <h6 class="story-card__fullname">{{$story->user->name}}</h6></p>
@@ -354,28 +357,23 @@
                                 to post a tribute for {{$detail->first_name. ' ' .$detail->last_name}}
                             </p>
                             @else
-                           <form method="POST" action="{{ route('stories.save', $detail->slug) }}" enctype="multipart/form-data">
+                           <form method="POST" action="{{ route('stories.save', $detail->slug) }}" class="post-form" enctype="multipart/form-data">
                                     @csrf
 
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <textarea name="story" class="form-control" cols="30" rows="10" placeholder="Tell a story....."></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <label>Image(Optional)</label>
-                                                <br><br>
-                                                <input name="image" type="file" class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group">
-                                                <button class="btn search-btn" style="background-color: #65594d;color:white">Publish</button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                      <div class="post-field">
+                            <textarea name="story" cols="30" rows="10" class="post-text" placeholder="Tell a story.."></textarea>
+                            <div class="post-group">
+                                <div class="post-attach">
+                                    <input type="file" id="post-file" name="image" hidden="hidden" id="files" accept="image/png, image/jpg, image/jpeg"/>
+                                    <button type="button" id="post-button">
+                                        <img src="/assets/img/attach-icon.svg">
+                                        <span>Attach Image</span>
+                                        <span id="post-text">No image attached yet.</span>
+                                    </button>
+                                </div>
+                                <input type="submit" class="post-submit" value="Post">
+                            </div>
+                        </div>
                                 </form>
                             @endif
                 </div>
@@ -384,7 +382,7 @@
             <div id="tribute" data-tab-content>
                 <div class="memorial-view-content">
                     <div class="memorial-view-top">
-                        <p class="tribute__initials">GA</p>
+                        <p class="tribute__initials">{{App\Memorial::getInitials($detail->users->name)}}</p>
                         <div class="tribute__poster post-link">
                             <h6 class="tribute__name">{{$detail->users->name}}</h6>
                             <div class="tribute__line">
@@ -417,7 +415,7 @@
                                         <div class="tribute-view-card__body-tribute-view">
                                             <div class="tribute-view-card__body-no-image">
                                                 <div class="tribute-view-card__header">
-                                                    <p class="tribute-view-card__initials">NJ</p>
+                                                    <p class="tribute-view-card__initials">{{App\Memorial::getInitials($tribute->users->name)}}</p>
                                                     <div class="tribute-view-card__info">
                                                         <p class="tribute-view-card__from">From</p>
                                                         <h6 class="tribute-view-card__fullname">{{$tribute->user->name}}</h6>
@@ -454,30 +452,17 @@
                 <div class="memorial-view-bottom">
                             <h5 class="memorial-view-heading">Post a tribute</h5>
                             @if (auth()->user())
-                                 <form method="POST" action="{{ route('tributes.save', $detail->slug) }}" enctype="multipart/form-data">
+                                 <form method="POST" action="{{ route('tributes.save', $detail->slug) }}" class= "postf-orm" enctype="multipart/form-data">
                                     @csrf
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="panel-group accordion" id="accordion">
-                                                <div class="panel panel-default">
-                                                    <div class="accordion-heading">
-                                                        <h4 class="accordion-title">
-                                                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                                                Type your Tribute
-                                                                <i class="indicator fa fa-chevron-down"></i>
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="collapseOne" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                            <div class="col-md-12 col-sm-12">
-                                                                <div class="form-group">
-                                                                    <textarea class="form-control" cols="30" rows="10" placeholder="Type your Tribute......" name="tribute"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                 <div class="post-field">
+                            <textarea name="tribute" cols="30" rows="10" class="post-text" placeholder="Tell a story.."></textarea>
+                            <div class="post-group">
+                                <input type="submit" class="post-submit" value="Post">
+                            </div>
+                        </div>
                                                 <div class="panel panel-default">
                                                     <div class="accordion-heading">
                                                         <h4 class="accordion-title">
@@ -492,7 +477,7 @@
                                                                 <div class="form-group">
                                                                     <label>Upload your tribute (document) </label>
                                                                     <br><br>
-                                                                    <input name="docs" type="file" class="form-control">
+                                                                    <input class="post-submit" name="docs" type="file" class="form-control">
                                                                 </div>
                                                             </div>
                                                         </div>

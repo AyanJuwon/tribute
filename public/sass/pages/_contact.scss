@@ -1,0 +1,97 @@
+.section-contact {
+    padding: 8rem 0;
+    display: flex;
+    gap: 5rem;
+
+    &__left {
+        width: 60%;
+    }
+
+    &__right {
+        width: 40%;
+        padding: 0 3rem;
+    }
+}
+
+.contact-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+    &:not(:last-child) {
+        margin-bottom: 3.5rem;
+    }
+
+    &__label {
+        font-size: 2rem;
+        color: #596273;
+    }
+
+    &__input,
+    &__text {
+        padding: 1.5rem 1.4rem;
+        font-size: 1.6rem;
+        font-family: inherit;
+        border-radius: .8rem;
+        border: 1px solid #8F92A1;
+        color: inherit;
+
+        &:focus {
+            border: 1px solid var(--primary-color);
+            outline: none;
+        }
+    }
+
+
+    &__text {
+        resize: none;
+    }
+}
+
+.form-submit {
+    font-family: inherit;
+    padding: 1.2em;
+    margin-top: 2rem;
+    color: var(--white-color);
+    background: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    display: inline-block;
+    transition: all .2s;
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(.95);
+    }
+}
+
+.contact-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+
+     &__map {
+         max-width: 100%;
+     }
+
+     &__info {
+         padding: 3em;
+     }
+
+     &__item {
+         display: flex;
+         gap: 1.3rem;
+
+         &:not(:last-child) {
+             margin-bottom: 4rem;
+         }
+     }
+
+     &__icon {
+         width: 3rem;
+     }
+
+     &__text {
+         font-size: 1.6rem;
+     }
+}

@@ -201,12 +201,14 @@ class HomeController extends Controller
     public function manageMemorial($slug){
         session()->put('backUrl');
         $memorial = Memorial::where('slug',$slug)->first();
+        $life = Memorial::where('slug',$slug)->firstOrFail();
         // $memorial = Memoriel::where('user_id',auth()->user()->id)->first();
         // $memorial = Memoriel::where('user_id',auth()->user()->id)->first();
         $activities = ActiviesLog::orderBy('created_at', 'desc')->where('slug', $slug)->take(5)->where('active', true)->get();
 
         return view('tribute.manage-memorial')
             ->with('memorial', $memorial)
+            ->with('life', $life)
             ->with('activities', $activities);
     }
 

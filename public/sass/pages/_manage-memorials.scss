@@ -1,0 +1,449 @@
+
+.memorial-form {
+
+    &__buttons {
+        display: flex;
+        align-items: center;
+        gap: 1.7rem;
+    }
+
+    &__button {
+        border: none;
+        background: transparent;
+        padding: 1em 3em;
+        border-radius: 8px;
+        font-size: 1.4rem;
+        display: inline-block;
+        cursor: pointer;
+
+        &--save {
+            background: var(--white-color);
+            color: #8F92A1;
+            border: 1px solid #8F92A1;
+        }
+
+        &--publish {
+            background: var(--primary-color);
+            color: var(--white-color);
+            border: 1px solid var(--primary-color);
+        }
+    }
+
+}
+
+.manage-memorial {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+
+    &__left {
+        flex: 0 0 62.5%;
+    }
+
+    &__right {
+        flex: 1;
+    }
+}
+
+//Left
+.memorial-search {
+
+    &__input {
+        width: 100%;
+        padding: 2rem;
+        box-shadow: var(--card-shadow);
+        border: none;
+        border-radius: 1rem;
+        font-size: 1.8rem;
+        font-family: inherit;
+
+        &::placeholder {
+            color: #bdbbbb;
+            font-family: inherit;
+            font-size: 1.8rem;
+        }
+
+        &:focus {
+            outline: none;
+            border: none;
+            box-shadow: var(--card-shadow-2);
+        }
+    }
+}
+
+.memorial-editor {
+    margin: 4rem 0 5rem 0;
+
+    &__sub {
+        font-size: 1.5rem;
+        color: var(--text-color-3);
+        margin: .5rem 0 2.5rem 0;
+    }
+}
+
+.editor-container {
+    max-width: 62.5rem;
+}
+
+#editor-life, #editor-about, #editor-story {
+    min-height: 10rem;
+}
+
+.memorial-permalink {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+
+    &__text {
+        font-size: 1.8rem;
+        color: #848199;
+    }
+}
+
+
+//Right 
+.preview-card {
+    border-radius: 1rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 4rem;
+
+    &__top {
+        padding: 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #F5F5F5;
+    }
+
+    &__center {
+        padding: 1.5rem 1.5rem 4rem 1.5rem;
+        border-bottom: 1px solid #F5F5F5;
+    }
+
+    &__bottom {
+        padding: 1.5rem;
+    }
+
+    &__preview-link {
+        display: flex;
+        align-items: center;
+        gap: .7rem;
+        text-decoration: underline;
+        font-size: 1.5rem;
+        color: var(--text-color-4);
+    }
+
+    &__view-tributes,
+    &__edit-details {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+        text-decoration: none;
+        border-bottom: 1px solid var(--primary-color);
+    }
+
+    &__contain {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 2.5rem;
+    }
+
+    &__text {
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
+    &__date-created,
+    &__expiring {
+        font-size: 1.5rem;
+    }
+
+    &__date-created {
+        margin-bottom: 2rem;
+    }
+}
+
+.share-card {
+    border-radius: 1rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 4rem;
+
+    &__center {
+        border-bottom: 1px solid #F5F5F5;
+        padding-bottom: 1.5rem;
+    }
+
+    &__bottom {
+        padding: 2rem;
+    }
+}
+
+.card-check {
+
+    &__check {
+        margin-bottom: 2rem;
+    }
+
+    &__text {
+        font-size: 1.1rem;
+        padding-left: 3.5rem;
+        margin-top: -1rem;
+    }
+}
+
+/* The container */
+.check-container {
+    display: block;
+    position: relative;
+    padding-left: 3.5rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    font-size: 1.8rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default radio button */
+  .check-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2.5rem;
+    width: 2.5rem;
+    background-color: var(--white-color);
+    border: 0.5px solid var(--primary-color);
+    border-radius: 50%;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .check-container:hover input ~ .checkmark {
+    background-color: var(--secondary-color);
+  }
+  
+  /* When the radio button is checked, add a blue background */
+  .check-container input:checked ~ .checkmark {
+    background-color: var(--primary-color);
+  }
+  
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the indicator (dot/circle) when checked */
+  .check-container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the indicator (dot/circle) */
+  .check-container .checkmark:after {
+       top: 4px;
+      left: 4px;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background: white;
+  }
+
+  .recent-activities {
+      
+    &__top {
+        width: 100%;
+        //height: 6rem;
+        background-color: var(--secondary-color);
+        border-radius: 3.2rem;
+        padding: 2.25rem 0;
+        display: block;
+    }
+
+    &__bottom {
+        margin-top: 4rem;
+    }
+
+    &__heading {
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    &__activities {
+        padding: 0 2rem;
+    }
+
+    &__activity {
+        list-style: none;
+        
+
+        &:not(:last-child) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    &__activity-text {
+        font-size: 1.6rem;
+        margin-bottom: 0.6rem;
+    }
+
+    &__activity-details {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    &__activity-date {
+        font-size: 1.25rem;
+        color: rgba(51, 51, 51, 0.438);
+    }
+
+    &__activity-status {
+        font-size: 1rem;
+        color: #13A74E;
+        background: #CEFFE2;
+        width: 4rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 2.4rem;
+    }
+  }
+
+  .upload-image {
+      display: flex;
+      align-items: center;
+  }
+
+  #list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+  }
+
+  #state {
+      font-size: 1.3rem;
+      color: #848199;
+      background: var(--white-color);
+      border: none;
+      border-radius: 8px;
+      padding: 3em 5em;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      box-shadow: var(--card-shadow);
+
+      &:hover {
+          box-shadow: var(--card-shadow-2);
+      }
+  }
+  
+  #list img {
+    width: 19rem;
+    height: 19rem;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+  
+  #deleteImgs {
+    display: none;
+    gap: .5rem;
+    align-items: center;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+
+  .add-story {
+      font-size: 1.3rem;
+      color: #848199;
+      width: 100%;
+      margin-bottom: 2rem;
+      border: none;
+      border-radius: 1rem;
+      box-shadow: var(--card-shadow);
+      background: var(--white-color);
+      padding: 4em 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+
+      &:hover {
+          box-shadow: var(--card-shadow-2);
+      }
+  }
+
+  .hide {
+      display: none;
+  }
+
+
+  #custom-button {
+  padding: 10px;
+  margin-top: 2rem;
+  color: white;
+  background-color: transparent;
+  cursor: pointer;
+  color: var(--primary-color);
+  border: none;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+
+  img {
+      width: 2rem;
+  }
+
+  &:focus {
+      outline: none;
+      border: none;
+  }
+}
+
+#custom-text {
+  margin-left: 1rem;
+  font-size: 1.3rem;
+  color: #848199;
+  font-family: inherit;
+  color: #aaa;
+}
+
+.upgrade {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 5rem;
+
+    &__text {
+        color: var(--text-color-3);
+        font-size: 1.4rem;
+        width: 70%;
+        text-align: center;
+    }
+
+    &__link {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 1.2rem;
+        background: var(--secondary-color);
+        padding: .5em;
+        border-radius: 24px;
+        display: inline-block;
+    }
+}

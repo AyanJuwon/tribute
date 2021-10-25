@@ -139,7 +139,11 @@ Route::middleware(['auth', 'check-id'])->group(function(){
 });
 
 Route::middleware(['auth'])->group(function (){
-    Route::get('/complete-registration','SocialController@completeRegistrationPage')->name('completeRegistration');
+    Route::get('/edit-profile/{id}','UsersController@completeProfileForm')->name('user.completeProfileForm');
+
+    Route::post('/edit-profile/{id}','UsersController@completeProfile')->name('user.completeProfile');
+    
+    Route::post('/manage-memorial/{slug}','MemorialController@manageMemorialForm')->name('user.completeMemorial');
 
     Route::get('/memorials', 'MemorialController@memorials')->name('memorials');
 

@@ -30,7 +30,7 @@ class SocialController extends Controller
             // If Social Account Exist then Find User and Login
             if($account){
                 auth()->login($account->user);
-                return redirect()->route('landing');
+                return redirect()->back();
             }
 
             // Find User
@@ -46,8 +46,8 @@ class SocialController extends Controller
                     'password'=> Hash::make('password'),
                     'role' => 'user',
                     'ip_address' => null,
-                    'location' => null,
-                    'country' => null,
+                    'location' => "Nigeria",
+                    'country' => 'Nigeria',
                     'provider_id'=> $social_user->getId(),
                     'provider_name'=>$provider,
                 ]);
@@ -64,7 +64,7 @@ class SocialController extends Controller
             auth()->login($user);
             // complete profile here redirect to complete profile page
             // completeProfilePage($user);
-            return redirect()->route('user.dashboard');
+            return redirect()->route('user.CompleteProfileForm');
             // return redirect()->route('landing');
 
         }catch(\Exception $e){
@@ -73,21 +73,5 @@ class SocialController extends Controller
         }
     }
 
-    public function completeProfilePage($user){
-
-        $user = User::where('id', auth()->user()->id)->firstOrFail();
-        return view('auth.complete-profile');
-    }
-
-
-       public function completeProfile(Request $request,$id){
-        $user = User::where('id', $id)->where('role','user')->firstOrFail();
-        $user->update([
-            'ip_address' => \request()->ip(),
-            'location' => $request->country,
-            'country' => $request->country,
-        ]);
-    session()->flash('message','Account creates successfully');
- return redirect()->route('landing');
-}
+   
 }

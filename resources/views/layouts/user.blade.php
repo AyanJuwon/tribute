@@ -51,8 +51,8 @@
                 <li><a href="{{route('landing')}}" class="main-nav__link active">Home</a></li>
                 
                 <li><a href="#" class="main-nav__link">How It Works</a></li>
-                <li><a href="/main/userProfile/dashboard.html" class="main-nav__link">Pricing</a></li>
-                <li><a href="{{route('faq')}}" class="main-nav__link">FAQ</a></li>
+                <li><a href="#" class="main-nav__link">Pricing</a></li>
+                <li><a href="#" class="main-nav__link">FAQ</a></li>
                 <li><a href="{{route('memorials')}}" class="main-nav__link">Memorials</a></li> 
                 
                 <li><a href="{{route('contact')}}" class="main-nav__link">Contact Us</a></li> 
@@ -60,6 +60,7 @@
             <ul class="main-nav__cta">
                 @if (auth()->user())
                     <li><a href="{{route('logout')}}" class="nav-cta-light">Log Out</a></li>
+                    <li><a href="{{route('user.dashboard')}}" class="nav-cta-dark">Dashboard</a></li>
                 @else
                      <li><a href="{{route('login')}}" class="nav-cta-light">Sign in</a></li>
                 <li><a href="{{route('register')}}" class="nav-cta-dark">Sign up</a></li>

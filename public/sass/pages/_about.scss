@@ -1,0 +1,51 @@
+
+.about-top {
+    background-image: linear-gradient(rgba(#171819, .80),
+    rgba(#171819, .50)), url(/assets/img/about-bg.png);
+    background-size: cover;
+    background-position: center;
+    height: 32rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-what-we-do {
+    margin-top: 4.5rem;
+}
+
+.content-heading {
+    font-size: 4rem;
+    margin-bottom: 1.6rem;
+}
+
+.content-text {
+    font-size: 1.8rem;
+    line-height: 1.5;
+}
+
+.top-content {
+    margin-top: 6rem;
+
+    &__right {
+        align-self: center;
+
+        img {
+            width: 54rem;
+        }
+    }
+}
+
+.bottom-content {
+    margin-top: 6rem;
+
+    &__left {
+        img {
+            width: 54rem;
+        }
+    }
+
+    &__right {
+        align-self: center;
+    }
+}

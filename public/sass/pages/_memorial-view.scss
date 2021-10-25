@@ -1,0 +1,559 @@
+
+.memorial-view-panel {
+    background-image: linear-gradient(rgba(#171819, .50),
+    rgba(#171819, .50)), url(/assets/img/memorial-view-bg.png);
+    height: 43rem;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.panel-box {
+    display: grid;
+    grid-template-columns: min-content, 1fr;
+    row-gap: 3rem;
+    column-gap: 3.5rem;
+
+    &__right {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    &__img {
+        width: 25rem;
+        border: 4px solid var(--white-color);
+        justify-self: end;
+    }
+
+    &__fullname {
+        font-size: 3.5rem;
+        color: var(--white-color);
+    }
+
+    &__date {
+        font-size: 1.5rem;
+        color: var(--white-color);
+    }
+
+    &__tab {
+        background: var(--white-color);
+        grid-column: 2 / 3;
+    }
+
+    &__tab-container {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(6rem, 1fr));
+        justify-content: center;
+    }
+
+    &__tab-name {
+        padding: 1.5em;
+        list-style: none;
+        font-size: 1.6rem;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--primary-color-light);
+        }
+    }
+
+    &__tab-name.active {
+        background-color: var(--secondary-color);
+        color: var(--primary-color);
+        border-bottom: 3px solid var(--primary-color);
+    }
+}
+
+.tab-content {
+    margin: 5.5em 0;
+}
+
+[data-tab-content] {
+    display: none;
+}
+
+[data-tab-content].active {
+    display: block;
+}
+
+.contains-link {
+    display: flex;
+    align-items: center;
+}
+
+.memorial-view-top {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    border-bottom: .5px solid #C4C4C4;
+    padding-bottom: 3.2rem;
+    margin: 0 auto;
+}
+
+.post-link {
+    margin-right: auto;
+}
+
+.post-tribute {
+    color: var(--primary-color);
+    font-size: 2rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+.memorial-view-bottom {
+    border-top: .5px solid #C4C4C4;
+    padding-top: 3.2rem;
+}
+
+.memorial-view {
+    display: flex;
+    gap: 3rem;
+    margin: 3rem 0 5rem 0;
+
+    &__left {
+        flex: 0 0 65%;
+    }
+
+    &__right {
+        flex: 1;
+    }
+
+    &__contain {
+        margin-top: 5rem;
+    }
+
+    &__quote {
+        font-size: 2rem;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    &__text {
+        font-size: 2rem;
+        line-height: 1.6;
+    }
+}
+
+.memorial-view-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.memorial-view-heading {
+    font-size: 2.5rem;
+}
+
+.card-share-memorial {
+    border-radius: 1rem;
+    box-shadow:  var(--card-shadow);
+    margin-top: 7.8rem;
+
+    &__top {
+        border-bottom: 1px solid #F5F5F5;
+        padding: 1.5em 2em;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2.5rem;
+        padding: 1.5em 2em;
+    }
+    
+    &__text {
+        font-size: 1.5rem;
+    }
+
+    &__socials {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    &__copy {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+    }
+}
+
+.card-heading {
+    font-size: 2rem;
+    font-weight: 500;
+    color: #181819;
+}
+
+.card-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    padding: 2.2em;
+    border-radius: 1rem;
+    box-shadow: var(--card-shadow);
+
+    &__views {
+        font-size: 2.5rem;
+        color: #181819;
+    }
+
+    &__created-by {
+        font-size: 1.5rem;
+    }
+
+    &__creator {
+        font-size: 2.5rem;
+    }
+}
+
+.memorial-view-login {
+    font-size: 2rem;
+    margin-top: 3.2rem;
+}
+
+.memorial-view-link:link,
+.memorial-view-link:visited {
+    color: var(--primary-color);
+    text-decoration: none;
+    border-bottom: 1px solid var(--primary-color);
+}
+
+
+//Story
+.story-card {
+    box-shadow: var(--card-shadow);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+
+    &__memory-contain {
+        //padding: 2em 3.5rem;
+        border-bottom: .5px solid #C4C4C4;
+    }
+
+    &__body {
+        padding: 3.2em 3.5rem;
+    }
+
+    &__body-no-image {
+        padding: 3rem 2rem;
+    }
+
+    &__body-story {
+       display: flex;
+    }
+
+    &__body-left {
+        width: 30%;
+        overflow: hidden;
+        box-sizing: content-box;
+        padding: 1.2rem;
+    }
+
+    &__body-right {
+        width: 70%;
+        padding: 1.5rem;
+    }
+
+    &__story-img {
+        width: 100%;
+        height: 26.5rem;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    &__memory {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+        padding: 1em 2em;
+    }
+
+    &__memory-of {
+        color: var(--text-color-3);
+    }
+
+    &__memory-img {
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;
+    }
+
+    &__header {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    &__more-menu-img {
+        position: absolute;
+        top: 65%;
+        right: -25%;
+        background: var(--white-color);
+        border-radius: 6px;
+        box-shadow: var(--card-shadow);
+    }
+
+    &__more-no-img {
+        position: absolute;
+        top: 65%;
+        right: -17%;
+        background: var(--white-color);
+        border-radius: 6px;
+        box-shadow: var(--card-shadow);
+        //display: none;
+    }
+
+    &__more-menu-option {
+        font-size: 1.5rem;
+        padding: 1em 1.2em;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #C4C4C4;
+        }
+    }
+
+    &__more-menu-option-2 {
+        font-size: 1.5rem;
+        padding: 1em 1.2em;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #C4C4C4;
+        }
+    }
+
+    &__initials {
+        width: 5rem;
+        height: 5rem;
+        font-size: 1.5rem;
+        color: var(--white-color);
+        background-color: #171819;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-right: 2.5rem;
+    }
+
+    &__more-icon {
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    &__more-icon-noImg {
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    &__fullname {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    &__from {
+        font-size: 1.2rem;
+        color: #9CA0AC;
+        margin-bottom: .7rem;
+    }
+
+    &__date {
+        font-size: 1.2rem;
+        color: #9CA0AC;
+        align-self: flex-start;
+    }
+}
+
+//Tribute
+.tribute-view-card {
+    box-shadow: var(--card-shadow);
+    border-radius: 1rem;
+    margin-bottom: 3rem;
+
+    &__memory-contain {
+        //padding: 2em 3.5rem;
+        border-bottom: .5px solid #C4C4C4;
+    }
+
+    &__body {
+        padding: 3.2em 3.5rem;
+    }
+
+    &__body-no-image {
+        padding: 3rem 2rem;
+    }
+
+    &__body-tribute-view {
+       display: flex;
+    }
+
+    &__body-left {
+        width: 30%;
+        overflow: hidden;
+        box-sizing: content-box;
+        padding: 1.2rem;
+    }
+
+    &__body-right {
+        width: 70%;
+        padding: 1.5rem;
+    }
+
+    &__story-img {
+        width: 100%;
+        height: 26.5rem;
+        object-fit: cover;
+        border-radius: 8px;
+    }
+
+    &__memory {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 1.5rem;
+        padding: 1em 2em;
+    }
+
+    &__memory-of {
+        color: var(--text-color-3);
+    }
+
+    &__memory-img {
+        width: 3.8rem;
+        height: 3.8rem;
+        border-radius: 50%;
+    }
+
+    &__header {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    &__more-menu-img {
+        position: absolute;
+        top: 65%;
+        right: -25%;
+        background: var(--white-color);
+        border-radius: 6px;
+        box-shadow: var(--card-shadow);
+    }
+
+    &__more-no-img {
+        position: absolute;
+        top: 65%;
+        right: -17%;
+        background: var(--white-color);
+        border-radius: 6px;
+        box-shadow: var(--card-shadow);
+        //display: none;
+    }
+
+    &__more-menu-option {
+        font-size: 1.5rem;
+        padding: 1em 1.2em;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #C4C4C4;
+        }
+    }
+
+    &__more-menu-option-2 {
+        font-size: 1.5rem;
+        padding: 1em 1.2em;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid #C4C4C4;
+        }
+    }
+
+    &__initials {
+        width: 5rem;
+        height: 5rem;
+        font-size: 1.5rem;
+        color: var(--white-color);
+        background-color: #171819;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-right: 2.5rem;
+    }
+
+    &__more-icon {
+        cursor: pointer;
+        margin-left: auto;
+    }
+
+    &__more-icon-noImg {
+        margin-left: auto;
+        cursor: pointer;
+    }
+
+    &__fullname {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    &__from {
+        font-size: 1.2rem;
+        color: #9CA0AC;
+        margin-bottom: .7rem;
+    }
+
+    &__date {
+        font-size: 1.2rem;
+        color: #9CA0AC;
+        align-self: flex-start;
+    }
+}
+
+.memorial-card-content {
+    font-size: 1.4rem;
+    line-height: 1.4;
+}
+
+.memorial-card-button {
+    border: none;
+    background: transparent;
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--primary-color);
+    margin-top: .5rem;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.dots-text {
+    color: var(--text-color);
+    font-size: 1.6rem;
+}

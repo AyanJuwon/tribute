@@ -10,24 +10,35 @@
 
 @extends('layouts.dashboard')
 @section('title')
-    Stories
+    Manage Memorial
 @endsection
 @section('description')
     <meta name="description" content="Stories">
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+    
+    <script type="module" src="{{asset('assets/js/manageMemorials.js')}}" defer></script>
 {{--    <!-- Main Quill library -->--}}
+
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <!-- Theme included stylesheets -->
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
 @endsection
 @section('content')
  <main>
+            
             <section class="dashboard profile-container profile-container--pages">
-                <form action="#" class="memorial-form">
+     {{-- <form > --}}
+                <form method="POST" id="memorialForm" action="{{route('user.completeMemorial', $memorial->slug)}}" enctype="multipart/form-data" class="memorial-form">
+                    @csrf
                     <div class="dashboard-top">
                         <h4 class="profile-heading">Memorial</h4>
                         <div class="memorial-form__buttons">
-                            <input type="submit" class="memorial-form__button memorial-form__button--save" value="Save">
-                            <input type="submit" class="memorial-form__button memorial-form__button--publish" value="Publish">
+                            {{-- <input type="file" class="memorial-form__button memorial-form__button--save" value="post image" name="img"> --}}
+                            <button type="button" onclick="submitForm()" class="memorial-form__button memorial-form__button--publish" value="Publish">Publish</button>
                         </div>
                     </div>
 
@@ -49,30 +60,23 @@
                             <div class="memorial-editor">
                                 <h4 class="profile-heading">About</h4>
                                 <p class="memorial-editor__sub">Create a short biography</p>
-                                <div class="editor-container">
-                                    <div id="editor-about">
-                                        <form method="POST" action="">
-                                            <textarea name="" id="" cols="30" rows="10"></textarea>
-
-                            <input type="submit" class="memorial-form__button memorial-form__button--publish" value="Submit">
-                                        </form>
-                                    </div>
+                                
+                                        <input type="hidden" name ="about">
+                                    <div id="editor-about" name="about">
+        
                                 </div>
                             </div>
 
                             <div class="memorial-editor">
                                 <h4 class="profile-heading">Life History</h4>
                                 <p class="memorial-editor__sub">Create detailed life history</p>
-                                <div class="editor-container">
-                                    <div id="editor-life">
-                                        <form method="POST" action="{{route('life.save',$memorial->slug)}}">
-                                            <textarea name="life" id="" cols="30" rows="10">
-
-                                            </textarea>
-                            <input type="submit" class="memorial-form__button memorial-form__button--publish" value="Submit">
-                                        </form>
+                                
+                                        <input type="hidden" name ="life">
+                                    <div id="editor-life" name="life">
+                                            
+        <p>{{$life->life}}</p>
+                                       
                                     </div>
-                                </div>
                             </div>
 
                             <div class="memorial-editor">
@@ -83,7 +87,7 @@
                                         <div class="upload-button">
                                             <div class="#">
 {{--                                                <form method="POST" action="{{route('image.save', $memorial->slug)}}">--}}
-                                                <input type="file" hidden="hidden" id="files" accept="image/png">
+                                                <input type="file" name="image[]" multiple hidden="hidden" id="files" >
                                                 <button type="button" id="state">
                                                     <img src="/assets/img/add-image-icon.svg" class="btnImg">
                                                     <span>Add Image</span>
@@ -115,17 +119,18 @@
                                     <span>Add a story</span>
                                 </button>
                                 <div class="story-container hide">
-                                    <div class="editor-container">
-                                        <div id="editor-story"></div>
+                                        
+                                        <input type="hidden" name ="story">
+                                        <div id="editor-story" name="story"></div>
                                         <div class="story-attach">
-                                            <input type="file" id="real-file" hidden="hidden" id="files" accept="image/png, image/jpg, image/jpeg"/>
-                                            <button type="button" id="custom-button">
+                                            <input type="file" id="real-file" name="story_image" hidden="hidden" id="files" accept="image/png, image/jpg, image/jpeg"/>
+                                            <button type="button" onclick="" id="custom-button">
                                                 <img src="/assets/img/attach-icon.svg">
                                                 <span>Attach Image</span>
                                                 <span id="custom-text">No image attached yet.</span>
                                             </button>
                                         </div>
-                                    </div>
+                                    
                                 </div>
 
                                 <div class="upgrade">
@@ -184,7 +189,7 @@
                                     <div class="card-check">
                                         <div class="card-check__check">
                                             <label class="check-container">Public
-                                                <input type="radio" checked="checked" name="radio">
+                                                <input checked type="radio" value=true  name="visibility">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <p class="card-check__text">
@@ -193,7 +198,7 @@
                                         </div>
                                         <div class="card-check__check">
                                             <label class="check-container">Private
-                                                <input type="radio" name="radio">
+                                                <input type="radio" value=false name="visibility">
                                                 <span class="checkmark"></span>
                                             </label>
                                             <p class="card-check__text">
@@ -259,10 +264,81 @@
                         </div>
                     </div>
                 </form>
+                    @include('partials.error')
+                  @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <strong>{{ $message }}</strong>
+                </div>
+            @endif
+
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             </section>
         </main>
 @endsection
 
 @section('script')
-    <script type="module" src="{{asset('assets/js/manageMemorials.js')}}"></script>
+    <script type="module" src="{{asset('assets/js/manageMemorials.js')}}">
+    </script>
+    
+    <script>
+var quill_about = new Quill('#editor-about', {
+  modules: {
+    toolbar: [
+      ['bold', 'italic'],
+      ['link', 'blockquote', 'code-block', 'image'],
+      [{ list: 'ordered' }, { list: 'bullet' }]
+    ]
+  },
+  placeholder: '{{$memorial->main_section_text}}',
+  theme: 'snow'
+});
+
+
+        var quill_life = new Quill('#editor-life', {modules: {
+    toolbar: [
+      ['bold', 'italic'],
+      ['link', 'blockquote', 'code-block', 'image'],
+      [{ list: 'ordered' }, { list: 'bullet' }]
+    ]
+  },
+  placeholder: 'Compose an epic...',
+  theme: 'snow'
+});
+var quill_story= new Quill('#editor-story', {
+  modules: {
+    toolbar: [
+      ['bold', 'italic'],
+      ['link', 'blockquote', 'code-block', 'image'],
+      [{ list: 'ordered' }, { list: 'bullet' }]
+    ]
+  },
+  placeholder: 'Compose an epic...',
+  theme: 'snow'
+});
+  console.log('i dey work');
+var form = document.querySelector('#memorialForm');
+function submitForm() {
+  // Populate hidden form on submit
+  
+  var image = document.querySelector('input[name=image]');
+  var story_image = document.querySelector('input[name=story_image]');
+  var about = document.querySelector('input[name=about]');
+  var story = document.querySelector('input[name=story]');
+  var life = document.querySelector('input[name=life]');
+  about.value = quill_about.container.children[0].innerHTML;
+  story.value =quill_story.container.innerText;
+  life.value = quill_life.container.children[0].innerHTML;
+  
+  form.submit();
+};
+    </script>
 @endsection

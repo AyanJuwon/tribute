@@ -2,21 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\BannedMemorial;
-use App\Mail\MemorialMail;
-use App\Memorial;
+use App\Life;
+use App\User;
+use App\Payment;
 use App\Stories;
 use App\Tribute;
-use App\Life;
+use App\Memorial;
 use App\AddImages;
-use App\Payment;
 use Carbon\Carbon;
-use App\User;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rule;
+use App\Mail\MemorialMail;
+use App\Mail\BannedMemorial;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\ActiviesLog;
+
+use App\Mail\infoMail;
 use Illuminate\Support\Facades\Validator;
 use Stevebauman\Location\Facades\Location;
 
@@ -116,6 +119,9 @@ class MemorialController extends Controller
         return view('tribute.createMemorial')
             ->with('memorials', Memorial::orderBy('created_at', 'desc')->where('active', true)->take(3)->get());
     }
+
+
+
 public function getInitials($stringName){
      $names = explode(" ", $stringName);
             $first_name = $names[0];
@@ -158,7 +164,7 @@ public function getInitials($stringName){
     public function viewMemorial($slug){
         $stories = Stories::where('slug',$slug)->get();
         $tributes = Tribute::where('slug',$slug)->get();
-        $lives = Life::where('slug',$slug)->first();
+        $life = Life::where('slug',$slug)->first();
         $images = AddImages::where('slug',$slug)->get();
 
         $detail = Memorial::where('slug', $slug)->firstOrFail();
@@ -169,7 +175,7 @@ public function getInitials($stringName){
         return view('tribute.memorialView')->with([
             'detail'=>$detail,
             'tributes'=>$tributes,
-            'lives'=> $lives,
+            'life'=> $life,
             'stories'=> $stories,
             'images'=>$images,]);
     }
@@ -498,4 +504,132 @@ public function getInitials($stringName){
         return redirect()->back();
     }
 
+
+
+
+
+
+
+
+    // MANAGE MEMORIAL
+    public function manageMemorialForm(Request $request,$slug){
+        // dd($request->all());
+        $memorial = Memorial::where('slug',$slug)->where('active','true');
+        // Validate Inputs
+        
+            dd($request->all());
+         $request->validate([
+            'life' => 'required',
+            'story' => 'max:1000',
+            'about' => 'required',
+            'image' => 'mimes:jpg,jpeg,gif,png,bmp,svg,svgz,cgm,djv,djvu,ico,ief,jpe,pbm,pgm,pnm,ppm,ras,rgb,tif,tiff,wbmp,xbm,xpm,xwd|max:3072',
+            'image.*' => 'mimes:jpg,jpeg,gif,png,bmp,svg,svgz,cgm,djv,djvu,ico,ief,jpe,pbm,pgm,pnm,ppm,ras,rgb,tif,tiff,wbmp,xbm,xpm,xwd|max:3072',
+            'story-image' => 'mimes:jpg,jpeg,gif,png,bmp,svg,svgz,cgm,djv,djvu,ico,ief,jpe,pbm,pgm,pnm,ppm,ras,rgb,tif,tiff,wbmp,xbm,xpm,xwd|max:3072',
+            'visibility'=> 'required',        
+            ]);
+
+
+            // Hash Image
+        if($request->hasFile('image')){
+            dd($request->all());
+            $file = $request->file('image');
+            $resize = Image::make($file)->resize(400, 365)->encode('jpg');
+            $hash = md5($resize->__toString());
+            $path = "uploads/images/{$hash}.jpg";
+            $resize->save(public_path($path));
+            $url = "{$hash}.jpg";
+        }
+dd($url);
+       $image = AddImages::create([
+            'image' => $url,
+            'slug' => $slug,
+            'user_id' => auth()->user()->id,
+        ]);
+
+        ActiviesLog::create([
+            'description' => 'shared an image',
+            'subject_type' => 'App\Image',
+            'subject_id' => $image->id,
+            'causer_type' => 'App\User',
+            'causer_id' => auth()->user()->id,
+            'slug' => $slug
+        ]);
+
+        $imageExtensions = ['jpg', 'jpeg', 'gif', 'png', 'bmp', 'svg', 'svgz', 'cgm', 'djv', 'djvu', 'ico', 'ief','jpe', 'pbm', 'pgm', 'pnm', 'ppm', 'ras', 'rgb', 'tif', 'tiff', 'wbmp', 'xbm', 'xpm', 'xwd'];
+
+         if($request->hasFile('story_image')){
+            $file = $request->file('story_image');
+            $extension = $file->getClientOriginalExtension();
+            if(in_array($extension, $imageExtensions)) {
+                $filename = time() . '.' . $extension;
+                $file->move('uploads/story', $filename);
+                $story_image = $filename;
+            }else {
+//                $image = '';
+                return session()->flash('error','The file has to be an image');
+            }
+        }else{
+            $story_image = '';
+        }
+
+
+        
+// Create Story
+if ($request->story!= ''){
+
+
+           $story = Stories::create([
+            'story' => $request->story,
+            'user_id' => auth()->user()->id,
+            'image' => $story_image,
+            'slug' => $slug,
+        ]);
+// Story Activity
+        ActiviesLog::create([
+            'description' => 'shared a story',
+            'subject_type' => 'App\Stories',
+            'subject_id' => $story->id,
+            'causer_type' => 'App\User',
+            'causer_id' => auth()->user()->id,
+            'slug' => $slug
+        ]);
+        }
+        $memorial = Memorial::where('slug', $slug)->where('active', true)->firstOrFail();
+
+        if($memorial->created_by != auth()->user()->id) {
+            Mail::to($memorial->users->email)->send(new infoMail($memorial));
+        }
+
+// get memorial
+        // $memorial = Memorial::where('slug',$slug)->where('active','true')->get();
+        // update memorial
+        // dd($request->all());
+            $memorial->update([
+                'main_section_text' =>$request->about,
+                'isPublic' => $request->visibility,
+            ]);
+            // Create life story
+            $life = Life::where('slug',$slug);
+            if ($life->count() == 1){
+        // dd($request->all());
+$life->update(
+    [
+            'life' => $request->life,
+    ]
+);
+            }else{
+                // dd($request->life);
+                Life::create([
+            'life' => $request->life,
+            'user_id' => auth()->user()->id,
+            'slug' => $slug
+        ]); 
+            }
+       
+
+        
+        return  redirect('memorial-view/'.$slug);
+
+
+    }
 }

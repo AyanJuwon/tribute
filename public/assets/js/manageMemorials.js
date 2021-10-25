@@ -72,7 +72,7 @@ let imagesObject = [];
 
 function handleFileSelect(evt) {
     var files = evt.target.files; // FileList object
-
+console.log(files);
     // Loop through the FileList and render image files as thumbnails.
     for (var i = 0, f; f = files[i]; i++) {
 
@@ -88,7 +88,6 @@ function handleFileSelect(evt) {
           displayImgData(e.target.result)
           addImage(e.target.result);
       };
-
       reader.readAsDataURL(f);
     }
 }
@@ -98,7 +97,6 @@ function loadFromLocalStorage() {
 
   if(images && images.length > 0){
     imagesObject = images;
-
     displayNumberOfImgs();
     images.forEach(displayImgData);
   }
@@ -106,6 +104,7 @@ function loadFromLocalStorage() {
 
 function addImage(imgData) {
   imagesObject.push(imgData);
+  console.log(imgData);
   displayNumberOfImgs();
   localStorage.setItem("images", JSON.stringify(imagesObject));
 }
@@ -118,21 +117,19 @@ function displayImgData(imgData) {
 
 function displayNumberOfImgs() {
   if(imagesObject.length > 0){
-
     // document.getElementById("state").innerHTML = imagesObject.length + " image" + ((imagesObject.length > 1) ? "s" : "") + " added";
-
+    
     document.getElementById("deleteImgs").style.display = "flex";
-
+    
   } else {
     document.getElementById("state").innerHTML = `<img src="/assets/img/add-image-icon.svg"> Add Image `;
     document.getElementById("deleteImgs").style.display = "none";
-  }
+  } 
 }
 
 function deleteImages(e) {
   e.preventDefault();
   imagesObject = [];
-  console.log(imagesObject);
   localStorage.removeItem("images");
   displayNumberOfImgs()
   document.getElementById('list').innerHTML = "";
@@ -142,12 +139,11 @@ function deleteImages(e) {
 
 const filesBtn = document.getElementById('files');
 const stateBtn = document.getElementById('state');
-
+console.log(imagesObject);
 stateBtn.addEventListener("click", function (e) {
   e.preventDefault();
   filesBtn.click();
 });
-
 filesBtn.addEventListener('change', handleFileSelect, false);
 document.getElementById('deleteImgs').addEventListener("click", deleteImages);
 loadFromLocalStorage();
@@ -159,7 +155,7 @@ console.log(storyContainer);
 
 addStory.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log('click');
+  //console.log('click');
   // storyContainer.style.display = 'block';
   // addStory.style.display = 'none';
   storyContainer.classList.remove('hide');
@@ -171,7 +167,7 @@ addStory.addEventListener('click', function (e) {
 const realFileBtn = document.getElementById("real-file");
 const customBtn = document.getElementById("custom-button");
 const customTxt = document.getElementById("custom-text");
-
+console.log(imagesObject);
 customBtn.addEventListener("click", function() {
   realFileBtn.click();
 });
